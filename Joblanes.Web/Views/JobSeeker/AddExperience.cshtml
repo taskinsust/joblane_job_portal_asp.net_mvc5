@@ -1,0 +1,113 @@
+﻿@using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder
+@model Web.Joblanes.Models.ViewModel.JobSeekerExpVm
+@Styles.Render("~/Content/bootstrap-datetimepicker")
+@{
+    ViewBag.Title = "AddExperience";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Add Experience</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("AddExperience", "JobSeeker"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CompanyName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CompanyAddress, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CompanyAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CompanyAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Designation, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateFrom, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DateFrom, new { htmlAttributes = new { @class = "form-control form_datetime", @readonly = "readonly"} })
+                        @Html.ValidationMessageFor(model => model.DateFrom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateTo, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DateTo, new { htmlAttributes = new { @class = "form-control form_datetime", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.DateTo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Responsibility, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Responsibility,new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Responsibility, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsCurrent, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.IsCurrent, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IsCurrent, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Add" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script src="~/Scripts/Jobseekerjs/jobseeker.js"></script>
+    <script type="text/javascript">
+        $(document).on("focus", "input.form_datetime", function () {
+            var today = new Date();
+            var initialDate = today.getFullYear().toString() + "-" + (today.getMonth() + 1) + "-" + today.getDate().toString();
+            var startDate = today.getFullYear().toString() + "-" + (1) + "-" + "01";
+            //var startDate = new Date();
+            var endDate = initialDate;
+            $(this).datetimepicker({
+                format: "yyyy-mm-dd",
+                //autoclose: true,
+                //todayBtn: false,
+                //showMeridian: true,
+                initialDate: initialDate,
+                //startDate: startDate,
+                //endDate: endDate,
+                startView: 2,
+                minView: 2,
+                maxView: 4
+            }).on('changeDate', function (ev) {
+                $(this).removeClass("highlight");
+            });
+        });
+    </script>
+}

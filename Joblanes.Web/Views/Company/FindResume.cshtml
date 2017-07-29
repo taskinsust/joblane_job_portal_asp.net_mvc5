@@ -1,0 +1,267 @@
+﻿@using Web.Joblanes.CompanyAdminService
+@Styles.Render("~/Content/styledatatable")
+@{
+    ViewBag.Title = "Find Resume";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    table.dataTable thead th, table.dataTable thead td {
+        border-bottom: 0px solid #111;
+        padding: 0px 0px;
+    }
+    .list-group-item {
+        padding: 2px 5px;
+        cursor: pointer;
+    }
+    .list-group {
+        margin-bottom: 0px;
+        padding-left: 0;
+    }
+    .list-group-item:first-child {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+    .btn-primary {
+        background-color: #149071;
+        color: #fff;
+    }
+    .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+        background-color: #149071;
+        border-color: #149071;
+    }
+    .list-group-item-success {
+        background-color: #dff0d8;
+        color: #3c763d;
+    }
+</style>
+<div class="row no-margin" style="padding-right: 0px;">
+
+    <div class="col-md-12 col-sm-12 no-padding">
+        <div class="col-md-3 col-sm-3">
+            <div class="panel panel-primary">
+                @*ViewBag.JobTitle = list.Where(x => x.Type == 1).ToList();
+                ViewBag.JobExp = list.Where(x => x.Type == 2).ToList();
+                ViewBag.Degree = list.Where(x => x.Type == 3).ToList();
+                ViewBag.Company = list.Where(x => x.Type == 4).ToList();*@
+                <div class="panel-body no-padding">
+                    <div class="">
+                        <ul class="list-group" id="jobTitle">
+                            <li class="list-group-item active">
+                                Job Titles
+                            </li>
+                            @{
+                                foreach (var jt in ViewBag.JobTitle)
+                                {
+                                    <li class="list-group-item  form-inline">
+                                        <span class="badge">@jt.TotalResume</span>
+                                        <input class="checkbox" type="checkbox" value="Software Engineer" /> @jt.Title
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="">
+                        <ul class="list-group " id="yearExp">
+                            <li class="list-group-item active">
+                                Years of Work Experience
+                            </li>
+
+                            @{
+                                List<FindResumeFilterDto> jobexplist = ViewBag.JobExp;
+                                if (jobexplist.Any())
+                                {
+                                    FindResumeFilterDto jobexp = jobexplist.FirstOrDefault(x => x.Title == "0");
+                                    if (jobexp != null)
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">@jobexp.TotalResume</span>
+                                            <input class="checkbox" type="checkbox" value="@jobexp.Title" /> Less than 1 year
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">0</span>
+                                            <input class="checkbox" type="checkbox" value="0" /> Less than 1 year
+                                        </li>
+                                    }
+                                    FindResumeFilterDto jobexp2 = jobexplist.FirstOrDefault(x => x.Title == "1");
+                                    if (jobexp2 != null)
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">@jobexp2.TotalResume</span>
+                                            <input class="checkbox" type="checkbox" value="@jobexp2.Title" /> 1-2 years
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">0</span>
+                                            <input class="checkbox" type="checkbox" value="0" /> 1-2 years
+                                        </li>
+                                    }
+                                    FindResumeFilterDto jobexp3 = jobexplist.FirstOrDefault(x => x.Title == "3");
+                                    if (jobexp3 != null)
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">@jobexp3.TotalResume</span>
+                                            <input class="checkbox" type="checkbox" value="@jobexp3.Title" /> 3-5 years
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">0</span>
+                                            <input class="checkbox" type="checkbox" value="0" /> 3-5 years
+                                        </li>
+                                    }
+                                    FindResumeFilterDto jobexp6 = jobexplist.FirstOrDefault(x => x.Title == "6");
+                                    if (jobexp6 != null)
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">@jobexp6.TotalResume</span>
+                                            <input class="checkbox" type="checkbox" value="@jobexp6.Title" /> 6-10 years
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">0</span>
+                                            <input class="checkbox" type="checkbox" value="0" /> 6-10 years
+                                        </li>
+                                    }
+                                    FindResumeFilterDto jobexp10 = jobexplist.FirstOrDefault(x => x.Title == "10");
+                                    if (jobexp10 != null)
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">@jobexp10.TotalResume</span>
+                                            <input class="checkbox" type="checkbox" value="@jobexp10.Title" /> More than 10 years
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="list-group-item form-inline">
+                                            <span class="badge">0</span>
+                                            <input class="checkbox" type="checkbox" value="0" /> More than 10 years
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li class="list-group-item form-inline">
+                                        <span class="badge">0</span>
+                                        <input class="checkbox" type="checkbox" value="0" /> Less than 1 year
+                                    </li>
+                                    <li class="list-group-item form-inline">
+                                        <span class="badge">0</span>
+                                        <input class="checkbox" type="checkbox" value="1" /> 1-2 years
+                                    </li>
+                                    <li class="list-group-item form-inline">
+                                        <span class="badge">0</span>
+                                        <input class="checkbox" type="checkbox" value="3" /> 3-5 years
+                                    </li>
+                                    <li class="list-group-item form-inline">
+                                        <span class="badge">0</span>
+                                        <input class="checkbox" type="checkbox" value="6" /> 6-10 years
+                                    </li>
+                                    <li class="list-group-item form-inline">
+                                        <span class="badge">0</span>
+                                        <input class="checkbox" type="checkbox" value="10" /> More than 10 years
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="">
+                        <ul class="list-group " id="education">
+                            <li class="list-group-item active">
+                                Education
+                            </li>
+                            @{
+                                foreach (var jt in ViewBag.Degree)
+                                {
+                                    <li class="list-group-item  form-inline">
+                                        <span class="badge">@jt.TotalResume</span>
+                                        <input class="checkbox" type="checkbox" value="Software Engineer" /> @jt.Title
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="">
+                        <ul class="list-group " id="company">
+                            <li class="list-group-item active">
+                                Companies
+                            </li>
+                            @{
+                                foreach (var jt in ViewBag.Company)
+                                {
+                                    <li class="list-group-item  form-inline">
+                                        <span class="badge">@jt.TotalResume</span>
+                                        <input class="checkbox" type="checkbox" value="Software Engineer" /> @jt.Title
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="">
+                        <input type="button" name="filter" id="filter" value="Filter" class="btn btn-primary form-control " />
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-9 col-sm-9">
+            <div class="panel panel-primary">
+                @*<div class="panel-heading custom-panel-h">Find Resume</div>*@
+
+                <div class="panel-body">
+                    <div class="">
+                        <table style="width: 100%">
+                            <tr class="filteringRow form-group">
+                                <th class="form-group" style="width: 40%;">
+                                    @Html.Label("what", htmlAttributes: new { @class = "control-label" })
+                                    @Html.Editor("what", new { htmlAttributes = new { @class = "form-control", @placeholder = "Degree,Skill or Designation", @style = "width: 100%" } })
+                                </th>
+                                <th class="form-group" style="width: 40%;">
+                                    @Html.Label("where", htmlAttributes: new { @class = "control-label" })
+                                    @Html.Editor("where", new { htmlAttributes = new { @class = "form-control", @placeholder = "City,State,Country or Zip", @style = "width: 100%" } })
+                                </th>
+
+                                <th class="form-group" style="width: 20%;">
+                                    <label class="control-label" for="">&nbsp;</label>
+                                    <input type="button" name="search" id="search" value="Find" class="btn btn-primary form-control " />
+                                </th>
+                            </tr>
+                        </table>
+                        <br />
+                        <table id="DataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th> </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/datatable")
+                <script type="text/javascript" src="~/Scripts/bootbox.js"></script>
+                <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+                <script src="~/Scripts/Company/FindResume.js"></script>
+            }

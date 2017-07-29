@@ -1,0 +1,90 @@
+﻿@using Web.Joblanes.Models
+@using Web.Joblanes.Models.ViewModel
+@model IEnumerable<Web.Joblanes.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "DashBoard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="padding:2%;">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading custom-panel-h">New Job Seeker List</div>
+            <div class="panel-body">
+
+                <table class="table table-bordered table-condensed table-hover">
+                    <tr>
+                        <th>Email</th>
+                        <th>Status</th>
+                        @*<th>Action</th>*@
+                    </tr>
+
+                    @{ int i = 1;
+                     foreach (UserVm jobSeekerObj in ViewBag.jobSeekList)
+                     {
+                        <tr>
+                            <td>@jobSeekerObj.Email</td>
+                            @if (jobSeekerObj.IsBlock)
+                            {
+                                <td>
+                                    <a data-netuser="@jobSeekerObj.AspNetUserId" class="glyphicon glyphicon-ok unblock" href="#">&nbsp;</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a data-netuser="@jobSeekerObj.AspNetUserId" class="glyphicon glyphicon-off block" href="#">&nbsp;</a>
+                                </td>
+                            }
+                        </tr>
+                     }
+                     i++;
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading custom-panel-h">New Company List</div>
+            <div class="panel-body">
+
+                <table class="table table-bordered table-condensed table-hover">
+                    <tr>
+                        <th>Email</th>
+                        <th>Status</th>
+                    </tr>
+
+                    @{
+                        foreach (UserVm empObj in ViewBag.empList)
+                        {
+                            <tr>
+                                <td>@empObj.Email</td>
+                                @if (empObj.IsBlock)
+                                {
+                                    <td>
+                                        <a data-netuser="@empObj.AspNetUserId" class="glyphicon glyphicon-ok unblock" href="#">&nbsp;</a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <a data-netuser="@empObj.AspNetUserId" class="glyphicon glyphicon-off block" href="#">&nbsp;</a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/bootbox.js"></script>
+    <script src="~/Scripts/Admin/DashBoard.js"></script>
+}

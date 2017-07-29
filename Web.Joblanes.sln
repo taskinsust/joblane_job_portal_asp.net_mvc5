@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobLanes.WcfService", "JobLanes.WcfService\JobLanes.WcfService.csproj", "{41FF523F-E62C-4F75-9C8E-39D975FD4C4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobLanes.BusinessModel", "JobLanes.BusinessModel\JobLanes.BusinessModel.csproj", "{748D970F-6BC4-4053-AC68-5C945502A3AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joblanes.Dao", "Joblanes.Dao\Joblanes.Dao.csproj", "{E0995F79-504B-4E02-8FE2-C3118FCA6158}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joblanes.Services", "Joblanes.Services\Joblanes.Services.csproj", "{3DC43E99-F85B-4B72-84FE-6BB41AF2F9D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joblanes.Web", "Joblanes.Web\Joblanes.Web.csproj", "{9509716B-AA4F-4128-ABFF-7122301DF29C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{41FF523F-E62C-4F75-9C8E-39D975FD4C4A} = {41FF523F-E62C-4F75-9C8E-39D975FD4C4A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joblanes.Services.Test", "Joblanes.Services.Test\Joblanes.Services.Test.csproj", "{998065D7-83B7-4720-A905-518629F6BA75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4600B8ED-8917-451C-A234-BFFA010E6189}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41FF523F-E62C-4F75-9C8E-39D975FD4C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41FF523F-E62C-4F75-9C8E-39D975FD4C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41FF523F-E62C-4F75-9C8E-39D975FD4C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41FF523F-E62C-4F75-9C8E-39D975FD4C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{748D970F-6BC4-4053-AC68-5C945502A3AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{748D970F-6BC4-4053-AC68-5C945502A3AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{748D970F-6BC4-4053-AC68-5C945502A3AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{748D970F-6BC4-4053-AC68-5C945502A3AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0995F79-504B-4E02-8FE2-C3118FCA6158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0995F79-504B-4E02-8FE2-C3118FCA6158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0995F79-504B-4E02-8FE2-C3118FCA6158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0995F79-504B-4E02-8FE2-C3118FCA6158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DC43E99-F85B-4B72-84FE-6BB41AF2F9D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC43E99-F85B-4B72-84FE-6BB41AF2F9D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC43E99-F85B-4B72-84FE-6BB41AF2F9D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC43E99-F85B-4B72-84FE-6BB41AF2F9D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9509716B-AA4F-4128-ABFF-7122301DF29C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9509716B-AA4F-4128-ABFF-7122301DF29C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9509716B-AA4F-4128-ABFF-7122301DF29C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9509716B-AA4F-4128-ABFF-7122301DF29C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{998065D7-83B7-4720-A905-518629F6BA75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{998065D7-83B7-4720-A905-518629F6BA75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{998065D7-83B7-4720-A905-518629F6BA75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{998065D7-83B7-4720-A905-518629F6BA75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

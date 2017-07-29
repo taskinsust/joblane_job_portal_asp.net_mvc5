@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "BrowseJob";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/styledatatable")
+
+<style type="text/css">
+    #inner {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .custom {
+        width: 200px !important;
+    }
+</style>
+
+
+<div id="outer" style="width:100%">
+    <div id="inner">
+        <div class="panel panel-default">
+            <div class="panel-heading"> My Applied Jobs</div>
+            <div class="panel-body">
+                @*<table>
+                    <tr class="form-group">
+                        <th>&nbsp;</th>
+                        <th class="form-group">
+                            @Html.DropDownList("jobCategoryId", (IEnumerable<SelectListItem>)ViewBag.JobCategory, "--Category--", new { @class = "form-control" })
+                        </th>
+                        <th class="form-group">
+                            <input id="PageSize" name="displayPerPage" type="text" class="form-control" placeholder="DisplayPerPage" value="@ViewBag.PageSize" />
+                        </th>
+                        <th class="form-group">
+                            <input type="button" name="search" id="search" value="Show" class="form-control btn btn-primary" />
+                        </th>
+                    </tr>
+                </table>*@
+                <br />
+                @*table-striped table-bordered table-condensed table-hover table-responsive*@
+                <table id="DataGrid" class="table table-hover table-responsive table-striped" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datatable")
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    <script type="text/javascript">
+        function dataTableRender() {
+            var pageSize = 10;
+            if ($('#PageSize').val() != "" && /^\d+$/.test($('#PageSize').val())) {
+                pageSize = parseInt($('#PageSize').val());
+            } else {
+                $('#PageSize').val(pageSize);
+            }
+            $('#DataGrid').dataTable({
+                destroy: true,
+                "processing": true,
+                searching: false,
+                serverSide: true,
+                "scrollX": true,
+                "bLengthChange": false,
+                "iDisplayLength": pageSize,
+                "bSort": false,
+                ajax: {
+                    url: '@Url.Action("BrowseJobSeeekerJob", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                        //d.jobCategoryId = $('#jobCategoryId').val();
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            dataTableRender();
+
+            $(document).on("click", "#search", function () {
+                dataTableRender();
+            });
+        });
+
+    </script>
+}

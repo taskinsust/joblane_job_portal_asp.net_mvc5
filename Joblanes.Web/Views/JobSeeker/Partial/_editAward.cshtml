@@ -1,0 +1,52 @@
+﻿@model Web.Joblanes.Models.ViewModel.JobSeekerAwardVm
+
+<div class="panel panel-default">
+    <div class="panel-heading">Award</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "awardForm", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.Id)
+                <input type="hidden" class="itemId" value="@Model.Id" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control title" } })
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateAwarded, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DateAwarded, new { htmlAttributes = new { @class = "form-control form_datetime dateAwarded", @readonly = "readonly", } })
+                        @Html.ValidationMessageFor(model => model.DateAwarded)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control description" })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="saveAwardBtn" type="button" value="Update" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+<script type="text/javascript">
+    $.validator.unobtrusive.parse("#awardForm");
+</script>

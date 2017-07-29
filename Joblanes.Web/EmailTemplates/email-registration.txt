@@ -1,0 +1,29 @@
+﻿<table>
+	<tr><td colspan="3" style="height:20px;"></td></tr>
+	<tr>
+		<td style="width:20px;"></td>
+		<td>
+			<img src="$Logo$" alt="joblanes" style="width:140px;height:32px;" />
+
+			<table>
+				<tr><td style="height:20px;"></td></tr>
+				<tr>
+					<td style="border: solid 1px #ddd; border-width: 1px 0; padding: 20px 0;font-family:Tahoma;">
+					Dear $ReceiverName$,
+					<br/><br/>
+					Please confirm your account by clicking <a href=\"" + $code$ + "\">here</a>
+					<br/><br/>
+					
+				</tr>
+				<tr><td style="height:10px;"></td></tr>
+			</table>
+
+			<p style="font-size: 80%; color: #777;font-family:Tahoma;">
+				This message was sent to $Recipient$.<br />
+				Joblanes, USA.
+			</p>
+		</td>
+		<td style="width:20px;"></td>
+	</tr>
+	<tr><td colspan="3" style="height:20px;"></td></tr>
+</table>

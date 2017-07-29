@@ -1,0 +1,172 @@
+﻿@using Web.Joblanes.Context
+@model Model.JobLanes.Dto.CompanyDto
+@{
+    ViewBag.Title = "Job Details";
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
+
+}
+@{
+    if (Model != null && Model.Id > 0)
+    {
+        var imgSrc = "";
+        if (Model.Logo != null && Model.Logo.Length > 0)
+        {
+            var base64 = Convert.ToBase64String(Model.Logo);
+            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+        }
+        <div class="row">
+            <div class="col-md-3 text-right" style="width: 25%; float: left;">
+                <a target="_blank" href="@Html.DisplayFor(model => model.CompanyDetailList[0].WebLink)">
+                    <img src='@imgSrc' width="100" />
+                </a>
+
+            </div>
+            <div class="col-md-9" style="padding-left: 2%; padding-top: 10px; width: 73%; float: left;">
+                <h2 class="text-primary">@Html.DisplayFor(model => model.Name)
+                    
+                </h2>
+
+
+                <div class="row">
+                    <div class="col-md-6" style="width: 50%; float: left;">
+                        <address>
+                            <strong>Address</strong><br>
+                            @Html.DisplayFor(model => model.CompanyDetailList[0].Address)<br />
+                            <abbr title="Phone">zip</abbr> @Html.DisplayFor(model => model.CompanyDetailList[0].Zip)
+                        </address>
+                    </div>
+                    <div class="col-md-6" style="width: 50%; float: left;">
+                        <address>
+                            <strong>Contact Information</strong><br>
+                            @Html.DisplayFor(model => model.ContactPerson)<br>
+                            @Html.DisplayFor(model => model.ContactPersonDesignation)<br>
+                            <abbr title="Phone">Mob:</abbr> @Html.DisplayFor(model => model.ContactMobile) <br/>
+                            <a href="mailto:#">@Html.DisplayFor(model => model.ContactEmail)</a>
+
+                        </address>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+
+            </div>
+            <div class="clearfix" style="padding-bottom: 5px;"></div>
+            <hr/>
+            <div class="col-md-3 text-right" style="width: 25%; float: left;">
+                <h4 class="text-primary">Company Type </h4>
+            </div>
+            <div class="col-md-9" style="width: 75%; float: left;">
+                @{
+        if (Model.CompanyType != null)
+        {
+            @Html.DisplayFor(model => model.CompanyType.Name)
+        }
+                }
+            </div>
+
+            <div class="clearfix" style="padding-bottom: 5px;"></div>
+
+            <div class="col-md-3 text-right" style="width: 25%; float: left;">
+                <h4 class="text-primary">Established Date </h4>
+            </div>
+            <div class="col-md-9" style="width: 75%; float: left;">
+
+                @{
+        var establishedDate = Model.CompanyDetailList[0].EstablishedDate;
+                }
+                @if (establishedDate != null)
+                {
+                    @establishedDate.Value.ToString("dd MMMM yyyy")
+                }
+            </div>
+
+            <div class="clearfix" style="padding-bottom: 5px;"></div>
+
+
+            <div class="col-md-3 text-right" style="width: 25%; float: left;">
+                <h4 class="text-primary">Company Location</h4>
+            </div>
+            <div class="col-md-9" style="width: 75%; float: left;">
+                @{
+        if (Model.CompanyDetailList[0].City != null)
+        {
+            @Html.DisplayFor(model => model.CompanyDetailList[0].City.Name)
+                    <span>,&nbsp;</span>
+        }
+        if (Model.CompanyDetailList[0].State != null)
+        {
+            @Html.DisplayFor(model => model.CompanyDetailList[0].State.Name)
+                    <span>,&nbsp;</span>
+        }
+        if (Model.CompanyDetailList[0].Country != null)
+        {
+            @Html.DisplayFor(model => model.CompanyDetailList[0].Country.Name)
+                    <span>,&nbsp;</span>
+        }
+        if (Model.CompanyDetailList[0].Country != null)
+        {
+            @Html.DisplayFor(model => model.CompanyDetailList[0].Country.Region.Name)
+                    <span>,&nbsp;</span>
+        }
+                }
+
+            </div>
+
+            <div class="clearfix" style="padding-bottom: 5px;"></div>
+
+            <div class="col-md-3 text-right" style="width: 25%; float: left;">
+                <h4 class="text-primary">Total Employee </h4>
+            </div>
+            <div class="col-md-9" style="width: 75%; float: left;">
+                @{
+        var empSize = Constants.Utility.GetDescriptionFromEnumValue((Constants.EmployeeSize)Model.CompanyDetailList[0].EmployeeSize);
+                }
+                @empSize
+            </div>
+
+            <div class="clearfix" style="padding-bottom: 5px;"></div>
+
+            <div class="col-md-3 text-right" style="width: 25%; float: left;">
+                <h4 class="text-primary">Trade License </h4>
+            </div>
+            <div class="col-md-9" style="width: 75%; float: left;">
+                @Html.DisplayFor(model => model.CompanyDetailList[0].TradeLicence)
+            </div>
+            <div class="clearfix" style="padding-bottom: 5px;"></div>
+            <div class="col-md-3 text-right" style="width: 25%; float: left;">
+                <h4 class="text-primary">Vision </h4>
+            </div>
+            <div class="col-md-9" style="width: 75%; float: left;">
+                @Html.DisplayFor(model => model.CompanyDetailList[0].Vision)
+            </div>
+            <div class="clearfix" style="padding-bottom: 5px;"></div>
+            <div class="col-md-3 text-right" style="width: 25%; float: left;">
+                <h4 class="text-primary">Mission </h4>
+            </div>
+            <div class="col-md-9" style="width: 75%; float: left;">
+                @Html.DisplayFor(model => model.CompanyDetailList[0].Mission)
+            </div>
+            <div class="clearfix" style="padding-bottom: 5px;"></div>
+
+            <div class="col-md-3 text-right" style="width: 25%; float: left;">
+                <h4 class="text-primary">Company Details </h4>
+            </div>
+            <div class="col-md-9" style="width: 75%; float: left;">
+                @Html.DisplayFor(model => model.CompanyDetailList[0].Description)
+            </div>
+            <div class="clearfix" style="padding-bottom: 5px;"></div>
+        </div>
+    }
+    else
+    {
+        <div class="row" style="padding: 20px;">
+            <div class="col-md-12 text-center">
+                <div class="alert alert-danger" role="alert">
+                    Company Profile Not found.
+
+                </div>
+                <a class="btn btn-primary btn-lg" href="/Admin/CompanyList">Back</a>                       
+            </div>
+        </div>
+
+    }
+}

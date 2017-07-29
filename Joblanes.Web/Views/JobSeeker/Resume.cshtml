@@ -1,0 +1,177 @@
+﻿
+@using Model.JobLanes.ViewModel
+@model Model.JobLanes.Dto.JobSeekerProfileDto
+
+@{
+    ViewBag.Title = "Resume";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-default">
+
+    <div class="panel-heading">Basic Information</div>
+    <div class="panel-body">
+        <table class="table table-bordered table-condensed table-hover table-responsive table-striped">
+            @if (Model.JobSeekerProfileVm != null)
+            {
+                <tr>
+                    <td>@Html.Label("FirstName", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.FirstName</td>
+                    <td>@Html.Label("LastName", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.LastName</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Contact", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.ContactNumber</td>
+                    <td>@Html.Label("Email", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.ContactEmail</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Father", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.FatherName</td>
+                    <td>@Html.Label("Mother", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.MotherName</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Address", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.Address</td>
+                    <td>@Html.Label("Linkedun", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.Linkedin</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Web", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.Weblink</td>
+                    <td>@Html.Label("DOB", new { @class = "control-label col-md-2" })</td>
+                    <td>@Model.JobSeekerProfileVm.Dob.ToString("yyyy MMMM dd")</td>
+                </tr>
+                
+
+                @*<div class="form-horizontal">*@
+                    @*<div class="form-group">
+                        @Html.Label("FirstName", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.FirstName
+                        </div>
+                        @Html.Label("LastName", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.LastName
+                        </div>
+                    </div>*@
+                    @*<div class="form-group">
+                        @Html.Label("Contact", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.ContactNumber
+                        </div>
+                        @Html.Label("Email", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.ContactEmail
+                        </div>
+                    </div>*@
+                    @*<div class="form-group">
+                        @Html.Label("Father", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.FatherName
+                        </div>
+                        @Html.Label("Mother", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.MotherName
+                        </div>
+                    </div>*@
+                    @*<div class="form-group">
+                        @Html.Label("Address", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.Address
+                        </div>
+                        @Html.Label("Linkedun", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.Linkedin
+                        </div>
+                    </div>*@
+                    @*<div class="form-group">
+                        @Html.Label("Web", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.Weblink
+                        </div>
+                        @Html.Label("DOB", new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Model.JobSeekerProfileVm.Dob.ToString("yyyy MMMM dd")
+                        </div>
+                    </div>*@
+                @*</div>*@
+
+            }
+
+            else
+            {
+                <span> No Data Exits</span>
+            }
+        </table>
+
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Educational Background</div>
+    @if (Model.JobSeekerEduVm != null)
+    {
+        foreach (JobSeekerEduVm vm in Model.JobSeekerEduVm)
+        {
+            <div class="panel-body">
+               <p>@vm.Institute</p>
+                <p>@vm.StartingYear.ToString("yyyy MMMM dd") - @vm.PassingYear.ToString("yyyy MMMM dd")</p>
+                <p>@vm.Degree</p>
+            </div>
+        }
+
+    }
+    else
+    {
+        <div class="panel-body">
+            <label> No Data Exits</label>
+        </div>
+    }
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Experiences</div>
+    @if (Model.JobSeekerExpVm != null)
+    {
+        foreach (JobSeekerExpVm evm in Model.JobSeekerExpVm)
+        {
+            <div class="panel-body">
+                <p>@evm.CompanyName</p>
+                <p>@evm.DateFrom.ToString("yyyy MMMM dd") - @evm.DateTo.ToString("yyyy MMMM dd")</p>
+            </div>
+        }
+
+    }
+    else
+    {
+        <div class="panel-body">
+            <label> No Data Exits</label>
+        </div>
+    }
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Training And Courses</div>
+    @if (Model.JobSeekerTrainingVm != null)
+    {
+
+        foreach (JobSeekerTrainingVm tvm in Model.JobSeekerTrainingVm)
+        {
+            <div class="panel-body">
+                <p>@tvm.Title</p>
+                <p>@tvm.Institute</p>
+                <p>@tvm.StartDate.ToString("yyyy MMMM dd") - @tvm.CloseDate.ToString("yyyy MMMM dd")</p>
+            </div>
+        }
+
+    }
+    else
+    {
+        <div class="panel-body">
+            <label> No Data Exits</label>
+        </div>
+    }
+</div>

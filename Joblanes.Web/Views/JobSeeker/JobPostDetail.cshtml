@@ -1,0 +1,260 @@
+﻿@using System.Diagnostics
+@using Web.Joblanes.Helper
+@model Model.JobLanes.Dto.JobPostsDto
+
+@{
+    ViewBag.Title = "JobPostDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    #inner {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .custom {
+        width: 200px !important;
+    }
+</style>
+
+
+<div id="outer" style="width:100%">
+    <div id="inner">
+        @Html.HiddenFor(x => x.Id);
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <span style="font-size: x-large; color: green; font-weight: bold">
+                                        @Model.JobTitle
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <span style="font-size: large; font-weight: 100">Company Name</span>
+
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <span style="font-size: medium">Job Description / Responsibility</span>
+                                </div>
+                                <div class="col-md-10">
+                                    @Model.JobDescription
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <span style="font-size: medium">Job Nature</span>
+                                </div>
+                                <div class="col-md-10">
+                                    @if (Model.JobLevel == JobNature.FullTime)
+                                    {
+                                        <span> PartTime</span>
+                                    }
+                                    else if (Model.JobLevel == JobNature.PartTime)
+                                    {
+                                        <span> FullTime</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <span style="font-size: medium">Educational Requirements</span>
+                                </div>
+                                <div class="col-md-10">
+                                    @Model.EducationalQualification
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <span style="font-size: medium">Experience Requirements</span>
+                                </div>
+                                <div class="col-md-10">
+                                    @Model.ExperienceMin To @Model.ExperienceMax Years
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <span style="font-size: medium">Job Requirements</span>
+                                </div>
+                                <div class="col-md-10">
+                                    @Model.AdditionalRequirements
+                                </div>
+                            </div>
+                            @if (Model.IsShowSalary == true)
+                            {
+                                <div class="row form-group">
+                                    <div class="col-md-2">
+                                        <span style="font-size: medium">Salary</span>
+                                    </div>
+                                    <div class="col-md-10">
+                                        @if (!String.IsNullOrEmpty(Model.SalaryRange))
+                                        {
+                                            <span>$@Model.SalaryRange</span>
+                                        }
+                                        else if (Model.SalaryMin > 0 && Model.SalaryMax > 0)
+                                        {
+                                            <span>$@Model.SalaryMin To $@Model.SalaryMax</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Negotiable</span>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <span style="font-size: medium">Job Location</span>
+                                </div>
+                                <div class="col-md-10">
+
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-2">
+                                    <span style="font-size: medium">Other Benefits</span>
+                                </div>
+                                <div class="col-md-10">
+                                    @Model.OtherBenefit
+                                </div>
+                            </div>
+                            @if (HttpContext.Current.User.IsInRole("Job seekers"))
+                            {
+                                <div class="row form-group">
+                                    <div class="col-md-12 col-lg-offset-5">
+                                        @if (Model.IsAlreadyApplied)
+                                        {
+                                            <button id="applyBtn" class="btn btn-primary" value="" disabled="disabled">Apply</button>
+                                        }
+                                        else
+                                        {
+                                            <button id="applyBtn" class="btn btn-primary" value="">Apply</button>
+                                        }
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Job Summary</div>
+                        <div class="panel-body">
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <span style="font-size: small">Published on</span>
+                                </div>
+                                <div class="col-md-8">
+
+                                    @{
+                                        Debug.Assert(Model.PublicationDate != null, "Model.PublicationDate != null");
+                                    }
+                                    @Model.PublicationDate.Value.ToString("D")
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <span style="font-size: small">Job Nature</span>
+                                </div>
+                                <div class="col-md-8">
+                                    @if (Model.JobLevel == JobNature.FullTime)
+                                    {
+                                        <span> PartTime</span>
+                                    }
+                                    else if (Model.JobLevel == JobNature.PartTime)
+                                    {
+                                        <span> FullTime</span>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <span style="font-size: small">Experience</span>
+                                </div>
+                                <div class="col-md-8">
+                                    @{
+                                        if (Model.ExperienceMin != null && Model.ExperienceMin > 0)
+                                        {
+                                            @Model.ExperienceMin <span>Years</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Not Required</span>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <span style="font-size: small">Job Location</span>
+                                </div>
+                                <div class="col-md-8">
+                                    @Model.JobLocation
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <span style="font-size: small">Application Deadline</span>
+                                </div>
+                                <div class="col-md-8">
+
+                                    @{
+                                        Debug.Assert(Model.DeadLine != null, "Model.DeadLine != null");
+                                    }
+                                    @Model.DeadLine.Value.ToString("D")
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <ul class="nav">
+                                <li>
+                                    @*<div class="btn btn-primary shortListedJob " id="@Model.Id">ShortList This Job</div>*@
+                                    <a href="#">
+                                        <span style="font-size: medium; font-style: normal ;font-weight: normal" class="glyphicon glyphicon-sort shortListedJob" id="@Model.Id">&nbsp;&nbsp;ShortList This Job</span>
+                                    </a>
+
+                                </li>
+                                @*@Url.Action("Resume", "JobSeeker")*@
+                                <li>
+                                    <a href="#">
+                                        <span style="font-size: medium; font-style: normal ;font-weight: normal" class="glyphicon glyphicon-share " id="@Model.Id">&nbsp;&nbsp;Share This Job</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span style="font-size: medium; font-style: normal ;font-weight: normal" class="glyphicon glyphicon-remove " id="@Model.Id">&nbsp;&nbsp;Report This Job</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script src="~/Scripts/Jobseekerjs/jobseeker.js"></script>
+}

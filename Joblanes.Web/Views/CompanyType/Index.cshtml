@@ -1,0 +1,68 @@
+﻿@Styles.Render("~/Content/styledatatable")
+@{
+    ViewBag.Title = "Company Types";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row" style="padding-right: 10px;">
+
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading custom-panel-h">Manage Company Type</div>
+
+            <div class="panel-body">
+
+                <div class="">
+                    <table>
+                        <tr class="filteringRow form-group">
+                            <th class="form-group">
+                                <input id="Name" name="Name" type="text" class="form-control" placeholder="Name" />
+                            </th>
+                            <th class="form-group">
+                                <select name="Status" id="Status" class="form-control">
+                                    <option value="">All</option>
+                                    <option value="1">Active</option>
+                                    <option value="-1">Inactive</option>
+                                </select>
+                            </th>
+                            <th class="form-group">
+                                <input id="pageSize" name="displayPerPage" type="text" class="form-control" placeholder="DisplayPerPage" value="@ViewBag.PageSize" />
+                            </th>
+                            <th class="form-group">
+                                <input type="button" name="search" id="search" value="View" class="form-control btn-primary" />
+                            </th>
+
+                        </tr>
+                    </table>
+                    <br />
+                    <table id="DataGrid" class="display table table-striped table-bordered table-condensed table-hover table-responsive" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Sl.
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center"></tbody>
+                    </table>
+                </div>
+
+                @Html.ActionLink("Create Company Type", "Create", "CompanyType", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/datatable")
+    <script type="text/javascript" src="~/Scripts/bootbox.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/CompanyType/Manage.js"></script>
+}

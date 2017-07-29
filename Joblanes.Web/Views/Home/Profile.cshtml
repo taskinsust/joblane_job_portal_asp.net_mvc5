@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="main-container">
+    <div class="container">
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            if (HttpContext.Current.User.IsInRole("Job seekers"))
+            {
+                
+            <div class="panel panel-default">
+              <div class="panel-body">
+                  <img src="~/images/profile.png" alt="profile" class="img-thumbnail">
+              </div>
+                <h2>This is Job Seeker Profile</h2>
+            </div>
+            }
+            else if (HttpContext.Current.User.IsInRole("Employers"))
+            {
+                  <div class="panel panel-default">
+                      <div class="panel-body">
+                          <img src="~/images/companies-icon.png" alt="company" class="img-thumbnail">
+                      </div>
+                      <h2>This is Employer Profile</h2>
+                    </div>
+            }
+        }
+     </div>
+</div>
+
+

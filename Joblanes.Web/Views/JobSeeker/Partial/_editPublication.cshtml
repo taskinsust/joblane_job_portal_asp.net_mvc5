@@ -1,0 +1,59 @@
+﻿
+@model Web.Joblanes.Models.ViewModel.JobSeekerPublicationsVm
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Award</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "publicationForm", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                <input type="hidden" class="itemId" value="@Model.Id" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control title" } })
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Url, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control url" } })
+                        @Html.ValidationMessageFor(model => model.Url)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PublishDate, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PublishDate, new { htmlAttributes = new { @class = "form-control form_datetime publishDate", @readonly = "readonly", } })
+                        @Html.ValidationMessageFor(model => model.PublishDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control description" })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="savePublicationBtn" type="button" value="Update" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    $.validator.unobtrusive.parse("#publicationForm");
+</script>
+

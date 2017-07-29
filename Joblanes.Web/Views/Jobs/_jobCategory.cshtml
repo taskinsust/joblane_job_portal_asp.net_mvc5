@@ -1,0 +1,28 @@
+﻿
+@using Model.JobLanes.Dto
+@model IEnumerable<Model.JobLanes.Dto.JobCategoryDto>
+<aside>
+    @*<div class="inner-box no-padding">
+            <div class="inner-box-content">
+                <a href="#">
+                    <img src="~/images/jobs/ibg.jpg" />
+                </a>
+            </div>
+        </div>*@
+    <div class="inner-box">
+        <h2 class="title-2">Top Job Categories </h2>
+        <div class="inner-box-content">
+            <ul class="cat-list arrow">
+                @foreach (JobCategoryDto categoryDto in Model)
+                {
+                    <li>
+                        <a href="@Url.Action("JobCategoryJobs", "Jobs", new { @id = categoryDto.Id })">@categoryDto.Name <span class="count"></span> </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    @*<div class="inner-box no-padding">
+            <img class="img-responsive" src="images/add2.jpg" alt="">
+        </div>*@
+</aside>

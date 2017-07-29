@@ -1,0 +1,64 @@
+﻿@using Web.Joblanes.Models.ViewModel
+@model Web.Joblanes.Models.ViewModel.JobSeekerTrainingVm
+@Styles.Render("~/Content/bootstrap-datetimepicker")
+<a style="margin-top: 10px" href="@Url.Action("AddTraining", "JobSeeker")" class="btn btn-m btn-primary"><i class="glyphicon glyphicon-plus-sign"></i> Add</a>
+
+@foreach (JobSeekerTrainingVm itemVm in ViewBag.eduList)
+{
+    using (Html.BeginForm(null, null, FormMethod.Post, new { id = "trainForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="panel panel-default" style="margin-top: 10px">
+            <div class="panel-heading">Update Training</div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+                    <input type="hidden" class="itemId" value="@itemVm.Id" />
+                    <div class="form-group">
+                        @Html.LabelFor(model => itemVm.Title, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="text" class="title form-control" value="@itemVm.Title" id="title-@itemVm.Id" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => itemVm.Description, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="text" class="description form-control" value="@itemVm.Description" id="description-@itemVm.Id" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => itemVm.Institute, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="text" class="institute form-control" value="@itemVm.Institute" id="institute-@itemVm.Id" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => itemVm.StartDate, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="text" class="startDate form-control form_datetime" value="@itemVm.StartDate" id="startDate-@itemVm.Id" readonly="readonly" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => itemVm.CloseDate, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="text" class="closeDate form-control form_datetime" value="@itemVm.CloseDate" id="closeDate-@itemVm.Id" readonly="readonly" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-1">
+                            <input type="button" id="trainBtn" value="Update" class="btn btn-primary" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="button" id="trainDelBtn" value="Delete" class="btn btn-warning" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

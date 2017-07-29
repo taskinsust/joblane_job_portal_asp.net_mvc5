@@ -1,0 +1,59 @@
+﻿@{
+    int totalData = (int)ViewBag.TotalData;
+    int perPage = (int)ViewBag.PerPage;
+    int currentPage = (int)ViewBag.CurrentPage;
+
+    int totalPage =  totalData/perPage+1;
+}
+
+<nav aria-label="Page navigation">
+    @{
+        if (perPage<totalData)
+        {
+            <ul class="pagination">
+                @if (currentPage == 1)
+                    {
+                        <li class="disabled">
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                     <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    }
+               
+                @{
+                    for (int i = 1; i <= totalPage; i++)
+                    {
+                        <li><a href="#">@i</a></li>
+                    }
+                }
+
+                @if (currentPage == totalPage)
+                {
+                   <li class="disabled">
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                }
+                
+            </ul>
+        }
+    }
+    
+</nav>

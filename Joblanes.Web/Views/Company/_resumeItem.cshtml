@@ -1,0 +1,54 @@
+﻿@model List<Model.JobLanes.Dto.JobSeekerSearchDto>
+
+<div class="add-details jobs-item">
+    <h4 class="job-title">
+        <a href="#"> @Model[0].JobSeekerName </a>
+    </h4>
+    <span class="info-row">
+        <span class="item-location"><i class="fa fa-map-marker"></i> @Model[0].JobSeekerLocation </span>
+        <span class="date"><i class=" icon-clock"> </i></span>
+        @*<span class=" salary"> <i class=" icon-money"> </i> $50000 - $81000 a year</span>*@
+    </span>
+    @{
+        foreach (var m in Model)
+        {
+            string datas = "";
+            datas = datas + m.Designation + " - " + m.CompanyName;
+            if (m.ExpFromDate!=null && m.ExpToDate!=null)
+            {
+                datas = datas + " (" + m.ExpFromDate.Value.ToString("MMMM yyyy") + " to " + m.ExpToDate.Value.ToString("MMMM yyyy") + ")";
+            }
+            else if(m.ExpFromDate!=null && m.ExpToDate==null)
+            {
+                datas = datas + " (" + m.ExpFromDate.Value.ToString("MMMM yyyy") + " to Present )";
+            }
+              <div class="jobs-desc">
+                    @datas
+                </div>
+        }
+    }
+    
+
+    <div class="job-actions">
+        <ul class="list-unstyled list-inline">
+            <li>
+                <a class="save-job" href="/Company/JobSeekerDetails?id=@Model[0].JobSeekerId">
+                    <span class="fa fa-star-o"></span>
+                    View Resume
+                </a>
+            </li>
+            <li class="saved-job">
+                <a href="#" class="saved-job">
+                    <span class="fa fa-star"></span>
+                    Saved Resume
+                </a>
+            </li>
+            <li>
+                <a href="#" class="email-job">
+                    <i class="fa fa-envelope"></i>
+                    Email Resume
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

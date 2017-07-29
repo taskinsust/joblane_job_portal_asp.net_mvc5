@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Model.JobLanes.Dto.JobPostsDto>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalRequirements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgeRangeFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgeRangeTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplyInstruction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeadLine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EducationalQualification)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExperienceMax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExperienceMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDisplayCompanyAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDisplayCompanyBusiness)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDisplayCompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsEmailCv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsExperienceRequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsFemale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsHardCopy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsMale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOnlineCv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPhotographAttach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsShowSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfVacancies)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherBenefit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PackageId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalaryDetail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalaryMax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalaryMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalaryRange)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,87 @@
+﻿@Styles.Render("~/Content/styledatatable")
+@{
+    ViewBag.Title = "Jobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Web.Joblanes.WebAdminService.JobCategoryDto> jobCategoryList = ViewBag.JobCategoryList;
+    List<Web.Joblanes.WebAdminService.JobTypeDto> jobTypeList = ViewBag.JobTypeList;
+}
+
+<div class="row" style="padding-right: 10px;">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading custom-panel-h">Manage Job</div>
+            <div class="panel-body">
+             
+                <div class="">
+                    <table>
+                        <tr class="filteringRow form-group">
+                            <th class="form-group">
+                                <select name="JobCategory" id="JobCategory" class="form-control">
+                                    <option value="0">All Job Category</option>
+                                    @{
+                                        foreach (var rl in jobCategoryList)
+                                        {
+                                            <option value="@rl.Id">@rl.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </th>
+                            <th class="form-group">
+                                <select name="JobType" id="JobType" class="form-control">
+                                    <option value="0">All Job Type</option>
+                                    @{
+                                        foreach (var rl in jobTypeList)
+                                        {
+                                            <option value="@rl.Id">@rl.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </th>
+                            <th class="form-group">
+                                <input id="Title" name="Title" type="text" class="form-control" placeholder="Title"/>
+                            </th>
+                            <th class="form-group">
+                                <select name="Status" id="Status" class="form-control">
+                                    <option value="">All</option>
+                                    <option value="1">Active</option>
+                                    <option value="-1">Inactive</option>
+                                </select>
+                            </th>
+                            <th class="form-group">
+                                <input id="pageSize" name="displayPerPage" type="text" class="form-control" placeholder="DisplayPerPage" value="@ViewBag.PageSize"/>
+                            </th>
+                            <th class="form-group">
+                                <input type="button" name="search" id="search" value="View" class="form-control btn-primary"/>
+                            </th>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table id="DataGrid" class="display table table-striped table-bordered table-condensed table-hover table-responsive" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Sl.</th>
+                            <th>Job Category</th>
+                            <th>Job Type</th>
+                            <th>Title</th>
+                            <th>
+                                Status
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center"></tbody>
+                    </table>
+                </div>
+                @Html.ActionLink("Create New Job", "JobPosting", "Company", new {@class = "btn btn-primary"})
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datatable")
+    <script type="text/javascript" src="~/Scripts/bootbox.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/Company/ManageJob.js"></script>
+}

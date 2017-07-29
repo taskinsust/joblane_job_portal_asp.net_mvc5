@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{748D970F-6BC4-4053-AC68-5C945502A3AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Model.JobLanes</RootNamespace>
+    <AssemblyName>Model.JobLanes</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="ConfigurationVariable.cs" />
+    <Compile Include="ConfigurationVariables.cs" />
+    <Compile Include="Dto\BaseDto.cs" />
+    <Compile Include="Dto\CityDto.cs" />
+    <Compile Include="Dto\CityVm.cs" />
+    <Compile Include="Dto\CompanyDetailsDto.cs" />
+    <Compile Include="Dto\CompanyDto.cs" />
+    <Compile Include="Dto\CompanyTypeDto.cs" />
+    <Compile Include="Dto\CountryDto.cs" />
+    <Compile Include="Dto\FindResumeFilterDto.cs" />
+    <Compile Include="Dto\JobApplicationDto.cs" />
+    <Compile Include="Dto\JobCategoryDto.cs" />
+    <Compile Include="Dto\JobPostDto.cs" />
+    <Compile Include="Dto\JobSeekerAdditionalInformationDto.cs" />
+    <Compile Include="Dto\JobSeekerAwardDto.cs" />
+    <Compile Include="Dto\JobSeekerCertificateDto.cs" />
+    <Compile Include="Dto\JobSeekerCvBankDto.cs" />
+    <Compile Include="Dto\JobSeekerDesiredJobDto.cs" />
+    <Compile Include="Dto\JobSeekerDetailsDto.cs" />
+    <Compile Include="Dto\JobSeekerDto.cs" />
+    <Compile Include="Dto\JobSeekerEducationDto.cs" />
+    <Compile Include="Dto\JobSeekerExperienceDto.cs" />
+    <Compile Include="Dto\JobSeekerGroupDto.cs" />
+    <Compile Include="Dto\JobSeekerLinkDto.cs" />
+    <Compile Include="Dto\JobSeekerMilitaryDto.cs" />
+    <Compile Include="Dto\JobSeekerMilitaryServiceDto.cs" />
+    <Compile Include="Dto\JobSeekerPatentsDto.cs" />
+    <Compile Include="Dto\JobSeekerProfileDto.cs" />
+    <Compile Include="Dto\JobSeekerPublicationsDto.cs" />
+    <Compile Include="Dto\JobSeekerSearchDto.cs" />
+    <Compile Include="Dto\JobSeekerSkillDto.cs" />
+    <Compile Include="Dto\JobTypeDto.cs" />
+    <Compile Include="Dto\OrganizationTypeDto.cs" />
+    <Compile Include="Dto\PaymentTypeDto.cs" />
+    <Compile Include="Dto\ProfileViewDto.cs" />
+    <Compile Include="Dto\RegionDto.cs" />
+    <Compile Include="Dto\RegionVm.cs" />
+    <Compile Include="Dto\StateDto.cs" />
+    <Compile Include="Dto\StateVm.cs" />
+    <Compile Include="Dto\UserProfileDto.cs" />
+    <Compile Include="EmailSender.cs" />
+    <Compile Include="Entity\Base\BaseEntity.cs" />
+    <Compile Include="Entity\City.cs" />
+    <Compile Include="Entity\Company.cs" />
+    <Compile Include="Entity\CompanyDetails.cs" />
+    <Compile Include="Entity\CompanyType.cs" />
+    <Compile Include="Entity\Country.cs" />
+    <Compile Include="Entity\JobCategory.cs" />
+    <Compile Include="Entity\JobPost.cs" />
+    <Compile Include="Entity\JobSeeker.cs" />
+    <Compile Include="Entity\JobSeekerAdditionalInformation.cs" />
+    <Compile Include="Entity\JobSeekerAward.cs" />
+    <Compile Include="Entity\JobSeekerCvBank.cs" />
+    <Compile Include="Entity\JobSeekerDesiredJob.cs" />
+    <Compile Include="Entity\JobSeekerDetails.cs" />
+    <Compile Include="Entity\JobSeekerEducationalQualification.cs" />
+    <Compile Include="Entity\JobSeekerExperience.cs" />
+    <Compile Include="Entity\JobSeekerGroup.cs" />
+    <Compile Include="Entity\JobSeekerJobPost.cs" />
+    <Compile Include="Entity\JobSeekerLink.cs" />
+    <Compile Include="Entity\JobSeekerMilitary.cs" />
+    <Compile Include="Entity\JobSeekerPatents.cs" />
+    <Compile Include="Entity\JobSeekerPrivateSetting.cs" />
+    <Compile Include="Entity\JobSeekerPublications.cs" />
+    <Compile Include="Entity\JobSeekerSkill.cs" />
+    <Compile Include="Entity\JobSeekerTrainingCourses.cs" />
+    <Compile Include="Entity\JobType.cs" />
+    <Compile Include="Entity\OrganizationType.cs" />
+    <Compile Include="Entity\PaymentType.cs" />
+    <Compile Include="Entity\ProfileView.cs" />
+    <Compile Include="Entity\Region.cs" />
+    <Compile Include="Entity\State.cs" />
+    <Compile Include="Entity\User\UserProfile.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
+    <Compile Include="Extensions\DbConnectionString.cs" />
+    <Compile Include="Extensions\GuidExtension.cs" />
+    <Compile Include="Extensions\HttpPostedFileBaseExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Helper\CheckArgument.cs" />
+    <Compile Include="Helper\LinkHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CityViewModel.cs" />
+    <Compile Include="ViewModel\CompanyDetailsViewModel.cs" />
+    <Compile Include="ViewModel\CompanyTypeViewModel.cs" />
+    <Compile Include="ViewModel\CompanyViewModel.cs" />
+    <Compile Include="ViewModel\CountryViewModel.cs" />
+    <Compile Include="ViewModel\JobCategoryViewModel.cs" />
+    <Compile Include="ViewModel\JobPostViewModel.cs" />
+    <Compile Include="ViewModel\JobSeekerEduVm.cs" />
+    <Compile Include="ViewModel\JobSeekerExpVm.cs" />
+    <Compile Include="ViewModel\JobSeekerProfileVm.cs" />
+    <Compile Include="ViewModel\JobSeekerTrainingVm.cs" />
+    <Compile Include="ViewModel\JobTypeViewModel.cs" />
+    <Compile Include="ViewModel\OrganizationTypeViewModel.cs" />
+    <Compile Include="ViewModel\PaymentTypeViewModel.cs" />
+    <Compile Include="ViewModel\RegionViewModel.cs" />
+    <Compile Include="ViewModel\StateViewModel.cs" />
+    <Compile Include="ViewModel\UserProfileVm.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

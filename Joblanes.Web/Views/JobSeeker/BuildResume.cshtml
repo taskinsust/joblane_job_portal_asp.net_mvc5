@@ -1,0 +1,58 @@
+﻿@model Web.Joblanes.Models.ViewModel.JobSeekerProfileVm
+@Styles.Render("~/Content/bootstrap-datetimepicker")
+@{
+    ViewBag.Title = "BuildResume";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    #inner {
+        width: 50%;
+        margin: 0 auto;
+    }
+</style>
+<div id="outer" style="width:100%">
+    <div id="inner">
+        <div id="profile">
+            @Html.Action("AddProfileInfo", "JobSeeker")
+        </div>
+    </div>
+</div>
+
+
+@*<div class="row">
+        <div class="col-md-6">
+            @Html.Action("AddProfileInfo", "JobSeeker")
+        </div>
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script src="~/Scripts/Jobseekerjs/jobseeker.js"></script>
+    <script type="text/javascript">
+        $(document).on("focus", "input.form_datetime", function () {
+            var today = new Date();
+            var initialDate = today.getFullYear().toString() + "-" + (today.getMonth() + 1) + "-" + today.getDate().toString();
+            var startDate = today.getFullYear().toString() + "-" + (1) + "-" + "01";
+            //var startDate = new Date();
+            var endDate = initialDate;
+            $(this).datetimepicker({
+                format: "yyyy-mm-dd",
+                //autoclose: true,
+                //todayBtn: false,
+                //showMeridian: true,
+                initialDate: initialDate,
+                //startDate: startDate,
+                //endDate: endDate,
+                startView: 2,
+                minView: 2,
+                maxView: 4
+            }).on('changeDate', function (ev) {
+                $(this).removeClass("highlight");
+            });
+        });
+    </script>
+
+}

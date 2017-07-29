@@ -1,0 +1,411 @@
+﻿@model Web.Joblanes.Models.ViewModel.JobPostViewModel
+@Styles.Render("~/Content/bootstrap-datetimepicker")
+@{
+    ViewBag.Title = "Job Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+    var genderList = ViewBag.GenderList as System.Web.Mvc.SelectList;
+    var jobTypeList = ViewBag.JobTypeList as System.Web.Mvc.SelectList; 
+    var jobLevelList = ViewBag.JobLevelList as System.Web.Mvc.SelectList;
+}
+
+<div class="row" style="padding-right: 10px;">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading custom-panel-h">Job Post</div>
+
+            <div class="panel-body">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <div class="row form-group">
+                            @Html.LabelFor(model => model.JobCategory, htmlAttributes: new {@class = "control-label col-md-4"})
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.JobCategory, (System.Web.Mvc.SelectList) ViewBag.JobCategoryList, "Select Job Category", new {@class = "form-control"})
+
+                                @Html.ValidationMessageFor(model => model.JobCategory, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.JobTitle, htmlAttributes: new {@class = "control-label col-md-4"})
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.JobTitle, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.JobTitle, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NoOfVacancies, htmlAttributes: new {@class = "control-label col-md-4"})
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.NoOfVacancies, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NoOfVacancies, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">How do you want to receive CV/Resume?</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                <span class="text-danger">Must select at least one option</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">@Html.CheckBoxFor(m => m.IsOnlineCv) Online CV/Resume</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                <span class="text-danger">[CV in Joblane formate will be availabe in your panel. also you can see applicant attach cv if available]</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">@Html.CheckBoxFor(m => m.IsEmailCv) Email Attachment</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                <span class="text-danger">[Applicant can send their CV as an attachment in your given email address]</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">@Html.CheckBoxFor(m => m.IsHardCopy) Hard Copy</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                <span class="text-danger">Must select at least one option</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">Applicant should enclose photograph with CV?</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                @Html.RadioButtonFor(m => m.IsPhotographAttach, true) Yes
+                                @Html.RadioButtonFor(m => m.IsPhotographAttach, false) No
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ApplyInstruction, htmlAttributes: new {@class = "control-label col-md-4"})
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.ApplyInstruction, new {@class = "form-control", @rows = "3"})
+                                @Html.ValidationMessageFor(model => model.ApplyInstruction, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DeadLine, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class=" col-md-8">
+                                @Html.EditorFor(model => model.DeadLine, new { htmlAttributes = new { @class = "form-control form_datetime", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.DeadLine, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">Do you want to display Company Name?</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                @Html.RadioButtonFor(m => m.IsDisplayCompanyName, true) Yes
+                                @Html.RadioButtonFor(m => m.IsDisplayCompanyName, false) No
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">Do you want to display Company Address?</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                @Html.RadioButtonFor(m => m.IsDisplayCompanyAddress, true) Yes
+                                @Html.RadioButtonFor(m => m.IsDisplayCompanyAddress, false) No
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">Do you want to display Company Bussiness?</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                @Html.RadioButtonFor(m => m.IsDisplayCompanyBusiness, true) Yes
+                                @Html.RadioButtonFor(m => m.IsDisplayCompanyBusiness, false) No
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">Do you want to specify age range?</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                <input type="radio" name="specifyAge" value="1" id="ageSpecifyYes" checked="checked" /> Yes
+                                <input type="radio" name="specifyAge" value="0" id="ageSpecifyNo" checked="checked" /> No
+                            </div>
+                        </div>
+                        <div class="form-group" id="AgeRangeDiv" style="display: none;">
+                            @Html.Label("Age Range", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.Label("From", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Year</span>
+                                        @Html.EditorFor(model => model.AgeRangeFrom, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                @Html.Label("To", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Year</span>
+                                        @Html.EditorFor(model => model.AgeRangeTo, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">Do you want to specify Gender?</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                <input type="radio" name="specifyGender" value="1" id="genderSpecifyYes" /> Yes
+                                <input type="radio" name="specifyGender" value="0" id="genderSpecifyNo" checked="checked"/> No
+                            </div>
+                        </div>
+                        <div class="form-group" id="genderDiv" style="display: none;">
+                            <label class="control-label col-md-4" for="">Gender</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                @foreach (var item in genderList)
+                                {
+                                    @Html.RadioButtonFor(model => model.Gender, item.Value, false)
+                                    <label class="control-label">@item.Text</label>
+                                }
+
+                                @*@Html.RadioButtonFor(m => m.Gender, 1) Male Only
+                                @Html.RadioButtonFor(m => m.Gender, 2) Female Only
+                                @Html.RadioButtonFor(m => m.Gender, 0) Any*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">Job Type</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                @{
+                                    int j = 0;
+                                    
+                                    foreach (var item in jobTypeList)
+                                    {
+                                        if (Model.JobType <= 0 && j++ == 0)
+                                        {
+                                            @Html.RadioButtonFor(model => model.JobType, item.Value, new {@checked="checked"})
+                                        }
+                                        else
+                                        {
+                                            @Html.RadioButtonFor(model => model.JobType, item.Value, false)
+                                        }
+
+                                        <label class="control-label">@item.Text</label>
+                                    }
+                                }
+                                @*@foreach (var item in jobTypeList)
+                                {
+                                    @Html.RadioButtonFor(model => model.JobType, item.Value, false)
+                                    <label class="control-label">@item.Text</label>
+                                }*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">Job Level</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                @{
+                                    int i = 0;
+                                    foreach (var item in jobLevelList)
+                                    {
+                                        if (Model.JobLevel ==null && i++ == 0)
+                                        {
+                                            @Html.RadioButtonFor(model => model.JobLevel, item.Value,  new {@checked="checked"})
+                                        }
+                                        else
+                                        {
+                                            @Html.RadioButtonFor(model => model.JobLevel, item.Value, false)
+                                        }
+
+                                        <label class="control-label">@item.Text</label>
+                                       
+                                    }
+                                }
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EducationalQualification, htmlAttributes: new {@class = "control-label col-md-4"})
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.EducationalQualification, new { @class = "form-control", @rows = "3" })
+                                @Html.ValidationMessageFor(model => model.EducationalQualification, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Upload doc/docx file</label>
+                            <div class="col-md-4">
+                                <input type="file" name="jodDescriptIOnFile" class="form-control" id="jodDescriptIOnFile"/>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="button" class="btn btn-primary" id="uploadDesc" name="uploadDesc" value="Upload" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.JobDescription, htmlAttributes: new {@class = "control-label col-md-4"})
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.JobDescription, new { @class = "form-control", @rows = "3" })
+                                @Html.ValidationMessageFor(model => model.JobDescription, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AdditionalRequirements, htmlAttributes: new {@class = "control-label col-md-4"})
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.AdditionalRequirements, new {@class = "form-control", @rows = "3"})
+                                @Html.ValidationMessageFor(model => model.AdditionalRequirements, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="">&nbsp;</label>
+                            <div class="col-md-8" style="padding-top: 7px;">
+                                @Html.RadioButtonFor(m => m.IsExperienceRequired, true) Experiance Required
+                                @Html.RadioButtonFor(m => m.IsExperienceRequired, false) No Experiance Required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Total Years of Experience", htmlAttributes: new {@class = "control-label col-md-4"})
+                            <div class="col-md-8">
+                                @Html.Label("Min", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Year</span>
+                                        @Html.EditorFor(model => model.ExperienceMin, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                   
+                                </div>
+                                @*@Html.Label("Max", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.ExperienceMax, new {htmlAttributes = new {@class = "form-control"}})
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.JobLocation, htmlAttributes: new {@class = "control-label col-md-4"})
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.JobLocation, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.JobLocation, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        @Html.Label("Compensation and Other Benefits", htmlAttributes: new {@class = "control-label col-md-4"})
+                        <div class="col-md-8">
+                            @Html.Label("Salary Range", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-12">
+                                @Html.RadioButtonFor(m => m.IsShowSalary, false) Negotiable
+                            </div>
+                            <div class="col-md-12">
+                                @Html.RadioButtonFor(m => m.IsShowSalary, true) Want to display the following range
+                            </div>
+                               
+                                @Html.Label("Min", htmlAttributes: new {@class = "control-label col-md-2"})
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    @Html.EditorFor(model => model.SalaryMin, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                               
+                            </div>
+                                @Html.Label("Max", htmlAttributes: new {@class = "control-label col-md-2"})
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        @Html.EditorFor(model => model.SalaryMax, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                @Html.LabelFor(model => model.SalaryDetail, htmlAttributes: new {@class = "control-label"})
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.SalaryDetail, new {@class = "form-control", @rows = "3"})
+                                    @Html.ValidationMessageFor(model => model.SalaryDetail, "", new {@class = "text-danger"})
+                                </div>
+                                @Html.LabelFor(model => model.OtherBenefit, htmlAttributes: new {@class = "control-label"})
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.OtherBenefit, new {@class = "form-control", @rows = "3"})
+                                    @Html.ValidationMessageFor(model => model.OtherBenefit, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                    </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-8">
+                                <input type="submit" value="Confirm" class="btn btn-primary" id="submit" />
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/Company/JobPosting.js"></script>
+    <script type="text/javascript">
+        var today = new Date();
+        $('.form_datetime').datetimepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayBtn: false,
+            showMeridian: true,
+            initialDate: new Date(),
+            startView: 2,
+            minView: 2,
+            maxView: 4
+
+        });
+
+        //var name = $("input type[name=specifyAge]").val();
+        //alert(name);
+        // alert($(""));
+        //specifyGender
+        $(document).on("click", "input[name=specifyGender]", function() {
+            var specifyGender = $('input[name=specifyGender]:checked').val();
+            if (specifyGender == 1) {
+                $("#genderDiv").show();
+            } else {
+                $("#genderDiv").hide();
+            }
+        });
+
+        $(document).on("click", "input[name=specifyAge]", function() {
+            var specifyGender = $('input[name=specifyAge]:checked').val();
+            if (specifyGender == 1) {
+                $("#AgeRangeDiv").show();
+            } else {
+                $("#AgeRangeDiv").hide();
+            }
+        });
+        $("#uploadDesc").click(function() {
+
+            // Checking whether FormData is available in browser  
+            if (window.FormData !== undefined) {
+
+                var fileUpload = $("#jodDescriptIOnFile").get(0);
+                var files = fileUpload.files;
+
+                // Create FormData object  
+                var fileData = new FormData();
+
+                // Looping over all files and add it to FormData object  
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+
+                // Adding one more key to FormData object  
+                //fileData.append('username', ‘Manas’);  
+
+                $.ajax({
+                    url: '/Company/UploadFiles',
+                    type: "POST",
+                    contentType: false, // Not to set any content header  
+                    processData: false, // Not to process data  
+                    data: fileData,
+                    success: function(result) {
+                        // alert(result); 
+                        var errorMessage = "";
+                        if (result.IsSuccess) {
+                            $("#JobDescription").val(result.Message);
+                        }
+                        else {
+                            errorMessage = '<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a>' + result.Message + '</div>';
+                            $('.customMessage').append(errorMessage);
+                        }
+                        
+                    },
+                    error: function(err) {
+                        // alert(err.statusText); 
+                        var errorMessage = "";
+                        errorMessage = '<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a>' + err.statusText + '</div>';
+                        $('.customMessage').append(errorMessage);
+                    }
+                });
+            } else {
+                alert("FormData is not supported.");
+            }
+        });
+    </script>
+
+}

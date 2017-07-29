@@ -1,0 +1,611 @@
+﻿
+@Styles.Render("~/Content/bootstrap-datetimepicker")
+@{
+    ViewBag.Title = "UpdateResume";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    #inner {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .custom {
+        width: 200px !important;
+    }
+</style>
+<div class="modal fade" id="getCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @*<h4 class="modal-title" id="myModalLabel"> </h4>*@
+            </div>
+            <div class="modal-message text-center" style='font-weight: bold; font-size:small;color: red'></div>
+            <div class="modal-body" id="getCode" style="overflow-x: scroll;">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="outer" style="width:100%">
+    <div id="inner">
+        <div class="row">
+            <div class="form-horizontal">
+                <span style="font-weight: bold; font-size: larger">My JobLanes Resume </span><br /> <br />
+                <div class="form-group">
+                    <div class="col-md-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Profile</h4>
+                                <div class="btn-group pull-right">
+                                    @*<button id="profileAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>*@
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="DataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Desired Jobs</h4>
+                                <div class="btn-group pull-right">
+                                    @if (ViewBag.IsShow == null)
+                                    {
+                                        <button id="desireAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                        @*<button id="desireAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>*@
+                                    }
+                                   
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="desireDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Work Experience</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="expAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="expDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Education</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="eduAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="eduDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Skills</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="skillAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="skillDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Link</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="linkAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="linkDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Military Service</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="militaryAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="militaryDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Award</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="awardAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="awardDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Certificate/Licenses</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="certificateAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="certificateDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Group</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="groupAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="groupDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Patents</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="patentAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="patentDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Publications</h4>
+                                <div class="btn-group pull-right">
+                                    <button id="publicationAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="publicationDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix">
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Additional Information</h4>
+                                <div class="btn-group pull-right">
+                                    @if (ViewBag.IsAddShow == null)
+                                    {
+                                        <button id="additionalAddBtn" class="btn btn-default btn-sm glyphicon glyphicon-plus-sign"></button>
+                                    }
+                                    
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="additionalDataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <a href="~/JobSeeker/CvUpload" class="btn btn-default custom">Upload Resume</a> <br /><br />
+                        <a href="~/JobSeeker/ViewResume" class="btn btn-default custom">View Resume</a><br /><br />
+                        <a href="#" class="btn btn-default custom">Forward Resume</a><br /><br />
+                        <a href="~/JobSeeker/ViewCv" class="btn btn-default custom">Download Resume</a><br /><br />
+                        <a id="delResume" class="btn btn-default custom">Delete Resume</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+    @*<script src="~/Scripts/jquery.validate.js"></script>*@
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/bootbox.js"></script>
+    <script type="text/javascript">
+
+        function dataTableRender() {
+            $('#DataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetProfileDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+        function dataTableRenderForDesire() {
+            $('#desireDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetJobSeekerDesiredData", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    },
+                },
+                "fnDrawCallback": function () {
+                    var l = $("#desireDataGrid tbody tr").length;
+                    if (l==1) {
+                        $("#desireAddBtn").hide();
+                    }
+                }
+            });
+        }
+        function dataTableRenderForExp() {
+            $('#expDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetExpDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+
+        function dataTableRenderForEdu() {
+            $('#eduDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetEduDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+
+        function dataTableRenderForSkill() {
+            $('#skillDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetSkillDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+
+        function dataTableRenderForLink() {
+            $('#linkDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetLinkDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+
+        function dataTableRenderForMilitary() {
+            $('#militaryDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetMilitaryDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+
+        function dataTableRenderForAward() {
+            $('#awardDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetAwardDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+        function dataTableRenderForCertificate() {
+            $('#certificateDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetCertificateDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+        function dataTableRenderForGroup() {
+            $('#groupDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetGroupDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+
+        function dataTableRenderForPatent() {
+            $('#patentDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetPatentDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+        function dataTableRenderForPublication() {
+            $('#publicationDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetPublicationsDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+        function dataTableRenderForAdditionalInfo() {
+            $('#additionalDataGrid').dataTable({
+                "paging": false,
+                "info": false,
+                "ordering": false,
+                searching: false,
+                ajax: {
+                    url: '@Url.Action("GetAdditionalInformationDataTable", "JobSeeker")',
+                    type: 'POST',
+                    data: function (d) {
+                    }
+                }
+            });
+        }
+
+        //function IsShowDesireAddButton() {
+        //    var desVal = $("#isHide").attr("data-val");
+        //    console.log("calling ..");
+        //    console.log(desVal);
+        //    if (desVal == "yes") {
+        //        $("#desireAddBtn").hide();
+        //    } else {
+        //        $("#desireAddBtn").show();
+        //    }
+        //}
+
+        $(document).ready(function () {
+            dataTableRender();
+            dataTableRenderForExp();
+            dataTableRenderForEdu();
+            dataTableRenderForSkill();
+            dataTableRenderForLink();
+            dataTableRenderForMilitary();
+            dataTableRenderForAward();
+            dataTableRenderForCertificate();
+            dataTableRenderForGroup();
+            dataTableRenderForPatent();
+            dataTableRenderForPublication();
+            dataTableRenderForAdditionalInfo();
+            dataTableRenderForDesire();
+            // IsShowDesireAddButton();
+
+            $(document).on("focus", "input.form_datetime", function () {
+
+                $(this).datepicker({
+                    format: "yyyy-mm-dd",
+                    startView: "months",
+                    minViewMode: "months",
+                    autoclose: true
+                });
+            });
+            $(document).on("focus", "input.form_datetime_dob", function () {
+
+                $(this).datepicker({
+                    format: "yyyy-mm-dd",
+                    autoclose: true,
+                    todayBtn: false,
+                    showMeridian: true,
+                    initialDate: new Date(),
+                    startView: 2,
+                    minView: 2,
+                    maxView: 4
+                });
+            });
+
+        });
+
+        function DateFormat(dateInput) {
+            var d = new Date(dateInput);
+            var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var date = month[d.getMonth()] + ", " + d.getFullYear();
+            //var time = d.toLocaleTimeString().toLowerCase();
+            return (date);
+        }
+
+    </script>
+    <script src="~/Scripts/Jobseekerjs/Profile.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Educatioin.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Exp.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Skill.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Link.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Military.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Award.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Certificate.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Group.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Patents.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Publication.js"></script>
+    <script src="~/Scripts/Jobseekerjs/AdditionalInfo.js"></script>
+    <script src="~/Scripts/Jobseekerjs/Desire.js"></script>
+}

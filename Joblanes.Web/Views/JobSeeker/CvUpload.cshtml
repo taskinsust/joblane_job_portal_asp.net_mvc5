@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "CvUpload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    #inner {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .custom {
+        width: 200px !important;
+    }
+</style>
+
+<div id="outer" style="width:100%">
+    <div id="inner">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Upload Cv</div>
+                    <div class="panel-body">
+
+                        @using (Html.BeginForm("CvUpload", "JobSeeker", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.TextBox("file", "", new { type = "file" }) <br />
+                            <input class="btn btn-primary" type="submit" value="Upload" />
+                            @ViewBag.Message
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

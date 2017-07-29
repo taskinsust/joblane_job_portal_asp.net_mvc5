@@ -1,0 +1,110 @@
+﻿<div class="header">
+    <nav class="navbar navbar-site navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+                <a href="/home/index" class="navbar-brand logo logo-title">
+                    <img src="~/images/logo.png" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="~/Jobs/BrowseJob">Browse Jobs</a></li>
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        if (HttpContext.Current.User.IsInRole("Web Admin"))
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Region", "Index", "Region")</li>
+                                    <li>@Html.ActionLink("Country", "Index", "Country")</li>
+                                    <li>@Html.ActionLink("State", "Index", "State")</li>
+                                    <li>@Html.ActionLink("City", "Index", "City")</li>
+                                    <li>@Html.ActionLink("Organization Type", "Index", "OrganizationType")</li>
+                                    <li>@Html.ActionLink("Company Type", "Index", "CompanyType")</li>
+                                    <li>@Html.ActionLink("Job Type", "Index", "JobType")</li>
+                                    <li>@Html.ActionLink("Job Category", "Index", "JobCategory")</li>
+                                    <li>@Html.ActionLink("Payment Type", "Index", "PaymentType")</li>                                   
+                                </ul>
+                            </li>
+                        }
+                    }
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        if (HttpContext.Current.User.IsInRole("Web Admin"))
+                        {
+                            @*<li style="color:#FFF;">@Html.ActionLink("Welcome - " + @HttpContext.Current.User.Identity.Name, "Manage", "Account") </li>*@
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome - @HttpContext.Current.User.Identity.Name <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Dashboard", "DashBoard", "Admin")</li>
+                                    <li>@Html.ActionLink("Web Admin Management", "WebAdmin", "Admin")</li>
+                                    <li>@Html.ActionLink("Company Management", "CompanyList", "Admin")</li>
+                                    <li>@Html.ActionLink("JobSeeker Management", "JobSeekerList", "Admin")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Account Manage", "Manage", "Account")</li>
+                                    <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
+                        }
+                        else if (HttpContext.Current.User.IsInRole("Job seekers"))
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome - @HttpContext.Current.User.Identity.Name <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Resume", "JobSeekerProfile", "JobSeeker")</li>
+                                    <li>@Html.ActionLink("MyJobs", "OnlineApplication", "JobSeeker")</li>
+                                    <li>@Html.ActionLink("Short Listed Job", "ShortListedJob", "JobSeeker")</li>
+
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Account Manage", "Manage", "Account")</li>
+                                    <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
+                        }
+                        else
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome - @HttpContext.Current.User.Identity.Name <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Job Management", "JobManage", "Company")</li>
+                                    <li>@Html.ActionLink("Job Posting", "JobPosting", "Company")</li>
+                                    <li>@Html.ActionLink("Job Applicants", "JobApplicant", "Company")</li>
+                                    <li>@Html.ActionLink("Search Resume", "FindResume", "Company")</li>
+
+                                    <li role="separator" class="divider"></li>
+
+                                    <li>@Html.ActionLink("View Profile", "Index", "Company")</li>
+                                    <li>@Html.ActionLink("Update Profile", "EditProfile", "Company")</li>
+                                    <li>@Html.ActionLink("Account Manage", "Manage", "Account")</li>
+                                    <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Logout", "LogOff", "Account")</li>
+                        }
+
+                    }
+                    else
+                    {
+                        
+                        
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Signup", "Register", "Account")</li>
+                    }
+
+                    @*<li class="postadd"><a class="btn btn-block   btn-border btn-post btn-danger" href="#">Post A Job</a></li>*@
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+</div>

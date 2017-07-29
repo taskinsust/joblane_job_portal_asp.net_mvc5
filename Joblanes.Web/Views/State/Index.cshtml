@@ -1,0 +1,103 @@
+﻿@using Model.JobLanes.Dto
+@Styles.Render("~/Content/styledatatable")
+@{
+    ViewBag.Title = "States";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<RegionDto> regionList = ViewBag.RegionList;
+    List<CountryDto> countryList = ViewBag.CountryList;
+}
+
+
+<div class="row" style="padding-right: 10px;">
+    
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading custom-panel-h">Manage State</div>
+
+            <div class="panel-body">
+
+                <div class="">
+                    <table>
+                        <tr class="filteringRow form-group">
+
+                            <th class="form-group">
+                                <select name="Region" id="Region" class="form-control">
+                                    <option value="0">All Region</option>
+                                    @{
+                                        foreach (var rl in regionList)
+                                        {
+                                            <option value="@rl.Id">@rl.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </th>
+                            <th class="form-group">
+                                <select name="Country" id="Country" class="form-control">
+                                    <option value="0">All Country</option>
+                                    @{
+                                        foreach (var rl in countryList)
+                                        {
+                                            <option value="@rl.Id">@rl.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </th>
+                            <th class="form-group">
+                                <input id="Name" name="Name" type="text" class="form-control" placeholder="Name"/>
+                            </th>
+                            <th class="form-group">
+                                <input id="ShortName" name="ShortName" type="text" class="form-control" placeholder="Short Name"/>
+                            </th>
+                           
+
+                        </tr>
+                        <tr class="filteringRow form-group">
+
+                           
+                            <th class="form-group">
+                                <select name="Status" id="Status" class="form-control">
+                                    <option value="">All</option>
+                                    <option value="1">Active</option>
+                                    <option value="-1">Inactive</option>
+                                </select>
+                            </th>
+                            <th class="form-group">
+                                <input id="pageSize" name="displayPerPage" type="text" class="form-control" placeholder="DisplayPerPage" value="@ViewBag.PageSize" />
+                            </th>
+                            <th class="form-group">
+                                <input type="button" name="search" id="search" value="View" class="form-control btn-primary" />
+                            </th>
+
+                        </tr>
+                    </table>
+                    <br/>
+                    <table id="DataGrid" class="display table table-striped table-bordered table-condensed table-hover table-responsive" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Sl.</th>
+                            <th>Region</th>
+                            <th>Country</th>
+                            <th>Name</th>
+                            <th>Short Name</th>
+                            <th>
+                                Status
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center"></tbody>
+                    </table>
+                </div>
+
+                @Html.ActionLink("Create State", "Create", "State", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/datatable")
+    <script type="text/javascript" src="~/Scripts/bootbox.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/State/Manage.js"></script>
+}

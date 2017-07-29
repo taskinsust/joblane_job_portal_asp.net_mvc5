@@ -1,0 +1,296 @@
+﻿@model Model.JobLanes.Dto.JobPostsDto
+@{
+    ViewBag.Title = "Job Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row" style="padding-right: 10px;">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+        <div class="panel-heading custom-panel-h"> Job Details</div>
+        @{
+            if (Model!=null && Model.Id>0)
+            {
+                  <div class="panel-body">
+                    <table class="table table-bordered table-hover table-responsive table-striped">
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Title </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.JobTitle)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Job Category </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.JobCategory.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Job Type </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.JobType.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>No Of Vacancies </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.NoOfVacancies)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Receive CV/Resume Option</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @{
+                                if (Model.IsOnlineCv != null && (bool) Model.IsOnlineCv)
+                                {
+                                    <span>Online&nbsp;&nbsp;</span>
+                                }
+                                if (Model.IsEmailCv != null && (bool) Model.IsEmailCv)
+                                {
+                                    <span>By Email&nbsp;&nbsp;</span>
+                                }
+                                if (Model.IsHardCopy != null && (bool) Model.IsHardCopy)
+                                {
+                                    <span>Hard Copy&nbsp;&nbsp;</span>
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Enclose photograph with CV?</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @{
+                                if (Model.IsPhotographAttach != null && (bool) Model.IsPhotographAttach)
+                                {
+                                    <span>Yes&nbsp;&nbsp;</span>
+                                }
+                                else
+                                {
+                                    <span>No&nbsp;&nbsp;</span>
+                                }
+
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Apply Instruction </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.ApplyInstruction)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Deadline </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.DeadLine)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Display</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @{
+                                if (Model.IsDisplayCompanyName != null && (bool) Model.IsDisplayCompanyName)
+                                {
+                                    <span>Company Name,&nbsp;&nbsp;</span>
+                                }
+                                if (Model.IsDisplayCompanyBusiness != null && (bool) Model.IsDisplayCompanyBusiness)
+                                {
+                                    <span>Company Business&nbsp;&nbsp;</span>
+                                }
+                                if (Model.IsDisplayCompanyAddress != null && (bool) Model.IsDisplayCompanyAddress)
+                                {
+                                    <span>Company Address&nbsp;&nbsp;</span>
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Age Range</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @{
+                                if (Model.AgeRangeFrom == null && Model.AgeRangeTo==null)
+                                {
+                                    <span>Not Required</span>
+                                }
+                                else
+                                {
+                                     if (Model.AgeRangeFrom!=null)
+                                    {
+                                        <span>From @Model.AgeRangeFrom</span>
+                                    }
+                                    if (Model.AgeRangeTo != null)
+                                    {
+                                        <span>To @Model.AgeRangeTo</span>
+                                    }
+                                }
+                               
+                            }
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Gender</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @{
+                                if (Model.IsMale != null && (bool) Model.IsMale)
+                                {
+                                    <span>Male Only&nbsp;&nbsp;</span>
+                                }
+                                else if (Model.IsFemale != null && (bool) Model.IsFemale)
+                                {
+                                    <span>Female Only&nbsp;&nbsp;</span>
+                                }
+                                else
+                                {
+                                    <span>All</span>
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Job Level</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @{
+                                if (Model.JobLevel != null && Model.JobLevel == 1)
+                                {
+                                    <span>Entry Level Job&nbsp;&nbsp;</span>
+                                }
+                                else if (Model.JobLevel != null && Model.JobLevel == 2)
+                                {
+                                    <span>Mid/Managerial Level Job&nbsp;&nbsp;</span>
+                                }
+                                else
+                                {
+                                    <span>Top Level Job</span>
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Educational Qualification </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.EducationalQualification)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Job Description </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.Raw(Html.Encode(Model.JobDescription).Replace("\n", "<br />"))
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Additional Requirements </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.AdditionalRequirements)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Job Location </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.JobLocation)
+                        </td>
+                    </tr>
+                    @{
+                        if (Model.IsExperienceRequired != null && (bool) Model.IsExperienceRequired)
+                        {
+                            <tr>
+                                <td style="text-align: right; width: 40%; font-weight: bold">
+                                    <strong>Experience </strong>
+                                </td>
+                                <td style="text-align: left">
+                                    @{
+                                        if (Model.ExperienceMin != null && Model.ExperienceMin > 0)
+                                        {
+                                            @Model.ExperienceMin <span>Years</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Not Required</span>
+                                        }
+                                    }
+                                   
+                                </td>
+                            </tr>
+                        }
+                    }
+                    @{
+                        if (Model.IsShowSalary != null && (bool) Model.IsShowSalary)
+                        {
+                            <tr>
+                                <td style="text-align: right; width: 40%; font-weight: bold">
+                                    <strong>Salary Range </strong>
+                                </td>
+                                <td style="text-align: left">
+                                    @if (!String.IsNullOrEmpty(Model.SalaryRange))
+                                    {
+                                        <span>$@Model.SalaryRange</span>
+                                    }
+                                    else if (Model.SalaryMin > 0 && Model.SalaryMax > 0)
+                                    {
+                                        <span>$@Model.SalaryMin To $@Model.SalaryMax</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Negotiable</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Salary Details </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.SalaryDetail)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Other Benefit </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.OtherBenefit)
+                        </td>
+                    </tr>
+                    </table>
+                    @Html.ActionLink("Back to List", "JobManage", "Company", new {@class = "btn btn-primary"})
+                    </div>
+            }
+        }
+      
+
+        </div>
+    </div>
+</div>

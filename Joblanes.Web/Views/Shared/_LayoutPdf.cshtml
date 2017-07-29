@@ -1,0 +1,24 @@
+﻿@using System.Security.Policy
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="~/images/favicon.png">
+    <title>Joblanes - @ViewBag.Title</title>
+  
+
+    @Styles.Render("~/Content/cssPdf")
+
+</head>
+
+<body  style="background-color: #ffffff;">
+    <div id="container" style="background-color: #ffffff;">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

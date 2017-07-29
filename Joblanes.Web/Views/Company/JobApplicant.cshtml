@@ -1,0 +1,76 @@
+﻿@Styles.Render("~/Content/styledatatable")
+@Styles.Render("~/Content/bootstrap-datetimepicker")
+@{
+    ViewBag.Title = "Job Applicants";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="padding-right: 10px;">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading custom-panel-h">Job Applicants</div>
+            <div class="panel-body">
+                <div class="">
+                    <table>
+                        <tr class="filteringRow form-group">
+                            <th class="form-group">
+                                <input type="hidden" name="jobPostId" id="jobPostId" value="@ViewBag.JobPostId"/>
+                                <input id="jobTitle" name="JobTitle" type="text" class="form-control" placeholder="JobTitle"/>
+                            </th>
+                            <th class="form-group">
+                                <select id="deadlineFlag" name="deadlineFlag" class="form-control">
+                                    <option value="0">All</option>
+                                    <option value="2">After Deadline</option>
+                                    <option value="1">Before Deadline</option>
+                                </select>
+                            </th>
+                            <th class="form-group">
+                                <input id="dateFrom" name="dateFrom" type="text" class="form-control" placeholder="Deadline From"/> &nbsp; To &nbsp;
+                                <input id="dateTo" name="dateTo" type="text" class="form-control" placeholder="Deadline To"/>
+                            </th>
+                            <th class="form-group">
+                                <input id="isShorlisted" name="isShorlisted" type="checkbox" class="form-control"  /> &nbsp; Only Shortlisted
+                            </th>
+                            <th class="form-group">
+                                <input id="pageSize" name="displayPerPage" type="text" class="form-control" placeholder="DisplayPerPage" value="@ViewBag.PageSize"/>
+                            </th>
+                            <th class="form-group">
+                                <input type="button" name="search" id="search" value="View" class="form-control btn-primary"/>
+                            </th>
+                        </tr>
+                    </table>
+                    <br />
+                    <table id="DataGrid" class="display table table-striped table-bordered table-condensed table-hover table-responsive" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Sl.</th>
+                                <th>Job Title</th>
+                                <th>Deadline</th>
+                                <th>Applicant Name</th>
+                                <th>Contact Email</th>
+                                <th>Contact Mobile</th>
+                                <th>Location</th>
+                                @*<th>Job Category</th>
+                                <th>Job Type</th>
+                                <th>Title</th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>Action</th>*@
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/datatable")
+    <script type="text/javascript" src="~/Scripts/bootbox.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+    <script src="~/Scripts/Company/JobApplicantList.js"></script>
+}

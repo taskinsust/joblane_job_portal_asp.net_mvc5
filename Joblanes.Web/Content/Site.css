@@ -1,0 +1,65 @@
+﻿.panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #149071;
+    border-color: #149071;
+}
+
+.navbar-site {
+            margin-bottom: 0 !important;
+            height: auto;
+            background: #00573D;
+            border-radius: 0;
+            border-bottom: none;
+        }
+
+        .navbar {
+            position: relative;
+            min-height: 50px;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+            color: white;
+            background-color: transparent;
+            font-weight: bold;
+        }
+         .panel-intro {
+            padding: 40px 0 25px;
+            background: #00573D;
+        }
+
+         .navbar-default .navbar-nav > li > a {
+            color: #FFF;
+        }
+
+         .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+          
+            color: #FFF;
+        }
+
+         .panel-primary > .custom-panel-h {
+            background-color: #00573d;
+            border-color: #00573d;
+            color: #FFF;
+          
+        }
+
+         .confirm-message {
+             color: #ff0000;
+             font-weight: bold;
+         }
+
+         .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+            background-color: #16a085;
+            color: #fff;
+            text-decoration: none;
+        }
+         /*.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+            color: #fff;
+        }*/
+
+         .row {
+            margin-left: 0px;
+            margin-right: 0px;
+        }

@@ -1,0 +1,98 @@
+﻿@model Model.JobLanes.Dto.CityDto
+@{
+    ViewBag.Title = "City Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="padding-right: 10px;">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading custom-panel-h"> City Details</div>
+            <div class="panel-body">
+                <table class="table table-bordered table-hover table-responsive table-striped">
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>Region </strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.Country.Region.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>@Html.DisplayNameFor(model => model.Country)</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.Country.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>@Html.DisplayNameFor(model => model.State)</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.State.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>@Html.DisplayNameFor(model => model.Name)</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>@Html.DisplayNameFor(model => model.ShortName)</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.ShortName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>@Html.DisplayNameFor(model => model.Status)</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.StatusText)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>@Html.DisplayNameFor(model => model.CreateBy)</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.CreateBy)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>@Html.DisplayNameFor(model => model.ModifyBy)</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.ModifyBy)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>@Html.DisplayNameFor(model => model.CreateDate)</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.CreateDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-weight: bold">
+                            <strong>@Html.DisplayNameFor(model => model.ModifyDate)</strong>
+                        </td>
+                        <td style="text-align: left">
+                            @Html.DisplayFor(model => model.ModifyDate)
+                        </td>
+                    </tr>
+                </table>
+                @Html.ActionLink("Back to List", "Index", "City", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>

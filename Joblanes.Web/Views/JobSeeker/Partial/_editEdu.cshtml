@@ -1,0 +1,60 @@
+﻿@model Web.Joblanes.Models.ViewModel.JobSeekerEduVm
+@Styles.Render("~/Content/bootstrap-datetimepicker")
+
+<div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">Educational Qualification</div>
+    <div class="panel-body">
+        @using (Html.BeginForm(null, null, FormMethod.Post))
+        {
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                <input type="hidden" class="itemId" value="@Model.Id" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Degree, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" class="degree form-control" value="@Model.Degree" id="degreeId" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Institute, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" class="institute form-control" value="@Model.Institute" id="instituteId" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FieldOfStudy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" class="fieldOfStudy form-control" value="@Model.FieldOfStudy" id="fieldOfStudyId" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Result, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="number" class="result form-control numbersOnly" value="@Model.Result" id="resultId" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StartingYear, new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        <input type="text" class="startingYear form_datetime form-control" value="@Model.StartingYear" id="startingYearId" readonly="readonly" />
+                    </div>
+                    @Html.LabelFor(model => model.PassingYear, new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        <input type="text" class="passingYear form_datetime form-control" value="@Model.PassingYear" id="passingYearId" readonly="readonly" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-1">
+                        <input type="button" id="eduBtn" value="Update" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

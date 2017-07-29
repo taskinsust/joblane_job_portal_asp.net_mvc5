@@ -1,0 +1,147 @@
+﻿@using System.Security.Policy
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/images/favicon.png">
+    <title>Joblanes - @ViewBag.Title</title>
+    <style type="text/css">
+        .highlight {
+            color: red;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function showErrorMessageBelowCtrl(ctrlId, message, show) {
+
+            var divHtml = '<div style="color:red;" id="' + ctrlId + '_err_div" >' + message + '</div>';
+
+            if (show == true) {
+                $('#' + ctrlId).addClass("highlight");
+                $('#' + ctrlId).after(divHtml);
+            } else {
+                $('#' + ctrlId).removeClass("highlight");
+                $('#' + ctrlId + '_err_div').remove();
+            }
+        }
+
+        function validateTextField(controlId, errorMessage) {
+
+            $(document).on("input propertychange", "#" + controlId, function (event) {
+
+                var value = $("#" + controlId).val().trim();
+                if (value.length == 0) {
+                    showErrorMessageBelowCtrl(controlId, "", false);
+                    showErrorMessageBelowCtrl(controlId, errorMessage, true);
+                    return false;
+                } else {
+                    showErrorMessageBelowCtrl(controlId, "", false);
+                }
+            });
+        }
+        function validateDropDownField(controlId, targetId, errorMessage) {
+
+            $(document).on("change", "#" + controlId, function (event) {
+
+                var val = $("#" + targetId).val();
+                if (val.length == 0) {
+                    //showErrorMessageBelowCtrl(controlId, "", false);
+                    showErrorMessageBelowCtrl(controlId, errorMessage, true);
+                } else {
+                    showErrorMessageBelowCtrl(controlId, "", false);
+                }
+            });
+        }
+
+        function validateDropDownField(controlId, errorMessage) {
+
+            $(document).on("change", "#" + controlId, function (event) {
+
+                var val = $("#" + controlId).val();
+                if (val.length == 0) {
+                    showErrorMessageBelowCtrl(controlId, "", false);
+                    showErrorMessageBelowCtrl(controlId, errorMessage, true);
+                } else {
+                    showErrorMessageBelowCtrl(controlId, "", false);
+                }
+            });
+        }
+
+        function validateListField(controlId, errorMessage) {
+
+            $(document).on("change", "#" + controlId, function (event) {
+                var val = $("#" + controlId).val();
+                if (val == null || val.length == 0) {
+                    showErrorMessageBelowCtrl(controlId, "", false);
+                    showErrorMessageBelowCtrl(controlId, errorMessage, true);
+                } else {
+                    showErrorMessageBelowCtrl(controlId, "", false);
+                }
+            });
+        }
+    </script>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+<body data-project-root="@Url.Content("~")">
+    <div id="wrapper">
+        @Html.Partial("_header")
+
+        <div class="row no-margin">
+            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                if (HttpContext.Current.User.IsInRole("Web Admin") || HttpContext.Current.User.IsInRole("Employers"))
+                {
+                    <div class="m-contemt" style="margin: 10px 0px 0px 0px"></div>
+                        @Html.Partial("_message")
+                        @RenderBody()
+                   
+                }
+                else if (HttpContext.Current.User.IsInRole("Job seekers"))
+                {
+                   <div class="m-contemt" style="margin: 10px 0px 0px 0px"></div>
+                    @Html.Partial("_message")
+                    @RenderBody()
+                  
+                }
+
+            }
+            else
+            {
+                <div class="m-contemt" style="margin: 10px 0px 0px 0px"></div>
+                @RenderBody()
+            }
+        </div>
+
+        @Html.Partial("_footer")
+
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+
+        $(document).on("input propertychange", ".numbersOnly", function (event) {
+            var valStr = $(this).val();
+            var id = $(this).attr("id");
+            var val = parseFloat(valStr);
+            showErrorMessageBelowCtrl(id, "", false);
+            if (isNaN(val)) {
+                $(this).val("");
+            }
+            else if (val < 0) {
+                $(this).val("");
+                showErrorMessageBelowCtrl(id, "Please enter valid amount", true);
+            } else {
+                $(this).val(val);
+            }
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿@model Web.Joblanes.Models.ViewModel.JobSeekerDesiredJobVm
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Desired Job
+    </div>
+    @*@if (ViewBag.IsShow != null)
+    {
+        <div id="isHide" data-val="yes"></div>
+    }
+    else
+    {
+        <div id="isHide" data-val="no"></div>
+    }*@
+
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" class="itemId" value="@Model.Id" />
+            <div class="form-horizontal">
+                <p>Help us match you with your next job</p>
+                <span style="font-weight: bold">Desired Job Types</span>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <div class="checkbox">
+                            <label>
+                                <input class="jobType " value="1" type="checkbox"> Part-Time
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input class="jobType " value="2" type="checkbox"> Temporary
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input class="jobType " value="3" type="checkbox"> Commission
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="checkbox">
+                            <label>
+                                <input class="jobType " value="4" type="checkbox"> Internship
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input class="jobType " value="5" type="checkbox"> Full-Time
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input class="jobType " value="6" type="checkbox"> Contract
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2"> Expected Salary</label>
+                    <div class="col-md-4">
+                        <input type="text" id="desireSalary" value="" class="form-control desireSalary" />
+                        @*@Html.ValidationMessageFor(model => model.DesiredSalary, "", new { @class = "text-danger" })*@
+                    </div>
+                    <div class="col-md-6">
+                        <select class="desireSalaryDuration form-control">
+                            <option value="5">Per Year</option>
+                            <option value="4">Per Month</option>
+                            <option value="3">Per Week</option>
+                            <option value="2">Per Day</option>
+                            <option value="1">Per Hour</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <div class="checkbox">
+                            <label>
+                                <input id="isRelocate" class="isRelocate" name="isRelocate" value="1" type="checkbox"> I am willing to Relocate
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 cities">
+                        <input type="radio" class="allocate" name="allocate" value="1"> Inside Usa<br>
+                        <input type="radio" class="allocate" name="allocate" value="2"> Outside Usa<br>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2">
+                        Employment Eligibility
+                    </label>
+                    <div class="col-md-10">
+                        <input type="radio" name="eligibility" value="1"> Authorized to work in the US for any employer<br>
+                        <input type="radio" name="eligibility" value="2"> Sponsorship required to work in the US<br>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="saveDesireBtn" type="button" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

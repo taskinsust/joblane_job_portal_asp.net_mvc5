@@ -1,0 +1,104 @@
+﻿@using SelectListItem = System.Web.WebPages.Html.SelectListItem
+@model Model.JobLanes.Dto.JobPostsDto
+
+@{
+    ViewBag.Title = "JobCategoryJobs";
+    Layout = "~/Views/Shared/_LayoutWide.cshtml";
+    string col = "9";
+}
+@Styles.Render("~/Content/styledatatable")
+<style type="text/css">
+    #inner {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .custom {
+        width: 200px !important;
+    }
+</style>
+<div class="row" style="margin-left: 2%;">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        if (HttpContext.Current.User.IsInRole("Web Admin") || HttpContext.Current.User.IsInRole("Employers"))
+        {
+            <div class="col-md-3 no-padding">
+                @Html.Partial("_sidebar")
+            </div>
+            col = "6";
+        }
+    }
+    <div class="col-md-@col no-padding">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Jobs From <strong>@ViewBag.categoryName</strong> category</div>
+            <div class="panel-body">
+                <div class="row no-margin">
+                    <table>
+                        <tr class="form-group">
+                            <th>&nbsp;</th>
+                            <th class="form-group">
+                                <input id="PageSize" name="displayPerPage" type="text" class="form-control" placeholder="DisplayPerPage" value="@ViewBag.PageSize" />
+                            </th>
+                            <th class="form-group">
+                                <input type="button" name="search" id="search" value="Show" class="form-control btn btn-primary" />
+                            </th>
+                        </tr>
+                    </table>
+                    <br />
+                    <table id="DataGrid" class="table table-hover table-responsive table-inverse table-search table-striped table-td-valign-middle" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/datatable")
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script src="~/Scripts/Jobseekerjs/jobseeker.js"></script>
+    <script type="text/javascript">
+        function dataTableRender() {
+            var pageSize = 10;
+            if ($('#PageSize').val() != "" && /^\d+$/.test($('#PageSize').val())) {
+                pageSize = parseInt($('#PageSize').val());
+            } else {
+                $('#PageSize').val(pageSize);
+            }
+            $('#DataGrid').dataTable({
+                destroy: true,
+                "processing": true,
+                searching: false,
+                serverSide: true,
+                "scrollX": true,
+                "bLengthChange": false,
+                "iDisplayLength": pageSize,
+                "bSort": false,
+                ajax: {
+                    url: '@Url.Action("JobCategoryJobsPost", "Jobs")',
+                    type: 'POST',
+                    data: function (d) {
+                        d.id = @ViewBag.jobcategoryId;
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            dataTableRender();
+            $(document).on("click", "#search", function () {
+                dataTableRender();
+            });
+        });
+
+    </script>
+}

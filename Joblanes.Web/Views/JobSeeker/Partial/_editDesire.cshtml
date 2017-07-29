@@ -1,0 +1,201 @@
+﻿@using System.Activities
+@using Web.Joblanes.Helper
+@model Web.Joblanes.Models.ViewModel.JobSeekerDesiredJobVm
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Desired Job
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" class="itemId" value="@Model.Id" />
+            <div class="form-horizontal">
+                <p>Help us match you with your next job</p>
+                <span style="font-weight: bold">Desired Job Types</span>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <div class="checkbox">
+                            @if (Model.IsPartTime)
+                            {  <label>
+                                <input class="jobType " value="1" type="checkbox" checked="checked"> Part-Time
+                            </label>}
+                            else
+                            {
+                                <label>
+                                    <input class="jobType " value="1" type="checkbox"> Part-Time
+                                </label>
+                            }
+
+                        </div>
+                        <div class="checkbox">
+                            @if (Model.IsTemporary)
+                            {  <label>
+                                <input class="jobType " value="2" type="checkbox" checked="checked"> Temporary
+                            </label>}
+                            else
+                            {
+                                <label>
+                                    <input class="jobType " value="2" type="checkbox"> Temporary
+                                </label>
+                            }
+
+                        </div>
+                        <div class="checkbox">
+                            @if (Model.IsCommission)
+                            { <label>
+                                <input class="jobType " value="3" type="checkbox" checked="checked"> Commission
+                            </label> }
+                            else
+                            {
+                                <label>
+                                    <input class="jobType " value="3" type="checkbox"> Commission
+                                </label>
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="checkbox">
+                            @if (Model.IsInternship)
+                            {  <label>
+                                <input class="jobType " value="4" type="checkbox" checked="checked"> Internship
+                            </label>}
+                            else
+                            {
+                                <label>
+                                    <input class="jobType " value="4" type="checkbox"> Internship
+                                </label>
+                            }
+
+                        </div>
+                        <div class="checkbox">
+                            @if (Model.IsFullTime)
+                            { <label>
+                                <input class="jobType " value="5" type="checkbox" checked="checked"> Full-Time
+                            </label>}
+                            else
+                            {
+                                <label>
+                                    <input class="jobType " value="5" type="checkbox"> Full-Time
+                                </label>
+                            }
+
+                        </div>
+                        <div class="checkbox">
+                            @if (Model.IsContract)
+                            {
+                                <label>
+                                    <input class="jobType " value="6" type="checkbox" checked="checked"> Contract
+                                </label>
+                            }
+                            else
+                            {
+                                <label>
+                                    <input class="jobType " value="6" type="checkbox"> Contract
+                                </label>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2"> Expected Salary</label>
+                    <div class="col-md-4">
+                        <input type="text" id="desireSalary" value="@Model.DesiredSalary" class="form-control desireSalary" />
+                        @*@Html.ValidationMessageFor(model => model.DesiredSalary, "", new { @class = "text-danger" })*@
+                    </div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("desireSalaryDuration", (IEnumerable<SelectListItem>)ViewBag.duration, new { @class = "form-control desireSalaryDuration", @required = "required" })
+                        @*<select class="desireSalaryDuration form-control">
+                                <option value="5">Per Year</option>
+                                <option value="4">Per Month</option>
+                                <option value="3">Per Week</option>
+                                <option value="2">Per Day</option>
+                                <option value="1">Per Hour</option>
+                            </select>*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <div class="checkbox">
+                            @if (Model.IsRelocate)
+                            {
+                                <label>
+                                    <input id="isRelocate" class="isRelocate" name="isRelocate" value="1" type="checkbox" checked="checked"> I am willing to Relocate
+                                </label>
+
+                            }
+                            else
+                            {
+                                <label>
+                                    <input id="isRelocate" class="isRelocate" name="isRelocate" value="1" type="checkbox"> I am willing to Relocate
+                                </label>
+
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-6 cities">
+                        @if (Model.RelocatingPlaceOne == InLocation.InsideUsa.ToString())
+                        {
+                            <label><input type="radio" class="allocate" name="allocate" value="1" checked="checked"> Inside Usa<br></label>
+                        }
+                        else
+                        {
+                            <label><input type="radio" class="allocate" name="allocate" value="1"> Inside Usa<br></label>
+
+                        }
+                        @if (Model.RelocatingPlaceTwo == InLocation.OutSideUsa.ToString())
+                        {
+                            <label><input type="radio" class="allocate" name="allocate" value="2" checked="checked"> Outside Usa<br></label>
+                        }
+                        else
+                        {
+                            <label><input type="radio" class="allocate" name="allocate" value="2"> Outside Usa<br></label>
+                        }
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2">
+                        Employment Eligibility
+                    </label>
+                   @*need refactoring will do later*@
+                    <div class="col-md-10">
+                        @if (Model.EmploymentEligibility == Eligibility.AuthorizedToWorkInUsa)
+                        {
+                            <label>
+                                <input type="radio" name="eligibility" value="1" checked="checked"><span>Authorized to work in the US for any employer</span>
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input type="radio" name="eligibility" value="1"><span>Authorized to work in the US for any employer</span>
+                            </label>
+                        }
+                        @if (Model.EmploymentEligibility == Eligibility.UnAuthorizedToWorkInUsa)
+                        {
+                            <label><input type="radio" name="eligibility" value="2" checked="checked"> <span>Sponsorship required to work in the US</span></label>
+
+                        }
+                        else
+                        {
+                            <label><input type="radio" name="eligibility" value="2"> <span>Sponsorship required to work in the US</span></label>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="saveDesireBtn" type="button" value="Update" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

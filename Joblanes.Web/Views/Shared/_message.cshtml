@@ -1,0 +1,25 @@
+﻿<section class="container customMessage">
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">×</a>
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div style="padding-left: 31%" class="alert alert-success">
+            <a class="close" data-dismiss="alert">×</a>
+            <strong>Success!</strong> @ViewBag.SuccessMessage
+        </div>
+    }
+    @if (ViewBag.InfoMessage != null)
+    {
+
+        <div class="alert alert-info">
+            <a class="close" data-dismiss="alert">×</a>
+            <strong>Info! </strong>@ViewBag.InfoMessage
+        </div>
+    }
+</section>
+

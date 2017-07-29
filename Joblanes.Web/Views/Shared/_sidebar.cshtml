@@ -1,0 +1,430 @@
+﻿@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+
+    if (HttpContext.Current.User.IsInRole("Web Admin"))
+    {
+        <div class="container no-padding">
+            <div class="row profile no-margin">
+                <div class="col-md-12 no-padding">
+                    <div class="profile-sidebar">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic">
+                            @*<img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">*@
+                        </div>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                @HttpContext.Current.User.Identity.Name
+                            </div>
+                            <div class="profile-usertitle-job">
+                                Web Admin
+                            </div>
+                        </div>
+
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- SIDEBAR BUTTONS -->
+                        @*<div class="profile-userbuttons">
+                                <button type="button" class="btn btn-success btn-sm">Follow</button>
+                                <button type="button" class="btn btn-danger btn-sm">Message</button>
+                            </div>*@
+                        <!-- END SIDEBAR BUTTONS -->
+                        <!-- SIDEBAR MENU -->
+                        <div class="profile-usermenu">
+                            <ul class="nav">
+                                <li class="active">
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Administration
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/DashBoard">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#"><i class="glyphicon glyphicon-user"></i>Settings</a>
+                                    <ul class="dropdown-menu">
+                                        @*<li><a tabindex="-1" href="#">Region</a></li>*@
+                                        <li>
+                                            <a href="/Region/Index">
+                                                <i class="glyphicon glyphicon-user"></i>
+                                                Region
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Country/Index">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                                Country
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/State/Index">
+                                                <i class="glyphicon glyphicon-flag"></i>
+                                                State
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/City/Index">
+                                                <i class="glyphicon glyphicon-flag"></i>
+                                                City
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/OrganizationType/Index">
+                                                <i class="glyphicon glyphicon-flag"></i>
+                                                Organization Type
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/CompanyType/Index">
+                                                <i class="glyphicon glyphicon-flag"></i>
+                                                Company Type
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/JobType/Index">
+                                                <i class="glyphicon glyphicon-flag"></i>
+                                                Job Type
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/JobCategory/Index">
+                                                <i class="glyphicon glyphicon-flag"></i>
+                                                Job Category
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/PaymentType/Index">
+                                                <i class="glyphicon glyphicon-flag"></i>
+                                                Payment Type
+                                            </a>
+                                        </li>
+                                        @*<li class="dropdown-submenu">
+                                                <a href="#">More..</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#">3rd level</a></li>
+                                                    <li><a href="#">3rd level</a></li>
+                                                </ul>
+                                            </li>*@
+
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="/Admin/WebAdmin">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Web Admin
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="nav" style="margin-top:10px">
+                                <li class="active">
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Company Management
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/CompanyList">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Company List
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <ul class="nav" style="margin-top: 10px">
+                                <li class="active">
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Jobseeker Management
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/JobSeekerList">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Jobseeker List
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <ul class="nav" style="margin-top:10px">
+                                <li class="active">
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Account/Manage">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Change Password
+                                    </a>
+                                </li>
+                                <li>
+
+                                    <a href="@Url.Action("logoff","Account")">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Sign Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END MENU -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+
+    if (HttpContext.Current.User.IsInRole("Job seekers"))
+    {
+        @*<div class="container">
+            <div class="row profile">
+                <div class="col-md-12">
+                    <div class="profile-sidebar">
+
+                        <div class="profile-userpic">
+                        </div>
+
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                @HttpContext.Current.User.Identity.Name
+                            </div>
+                            <div class="profile-usertitle-job">
+                                Job Seeker
+                            </div>
+                        </div>
+
+                        <div class="profile-userbuttons">
+                            <button type="button" class="btn btn-success btn-sm">Follow</button>
+                            <button type="button" class="btn btn-danger btn-sm">Message</button>
+                        </div>
+                        <div class="profile-usermenu">
+                            <ul class="nav">
+                                <li class="active">
+                                    <a href="">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Resume
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Resume", "JobSeeker")">
+                                        <i class="glyphicon glyphicon-eye-open"></i> View Resume
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("BuildResume", "JobSeeker")">
+                                        <i class="glyphicon glyphicon-edit"></i> Edit Resume
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("CvUpload", "JobSeeker")">
+                                        <i class="glyphicon glyphicon-export"></i> Upload Resume
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="glyphicon glyphicon-download-alt"></i> Download resume</a>
+                                </li>
+
+
+                                <li>
+                                    <a href="#"><i class="glyphicon glyphicon-envelope"></i> Email Resume</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="glyphicon glyphicon-trash"></i> Delete Resume</a>
+                                </li>
+
+                            </ul>
+
+                            <ul class="nav" style="margin-top:10px">
+                                <li class="active">
+                                    <a href="#"><i class="glyphicon glyphicon-flash"></i> My Activities</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("OnlineApplication", "JobSeeker")">
+
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Online Application
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Emailed Resume
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ShortListedJob", "JobSeeker")">
+                                        <i class="glyphicon glyphicon-flag"></i>
+                                        Shortlisted Job
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="nav" style="margin-top:10px">
+                                <li class="active">
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Employer Activities
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Employer Viewed Resume
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Employer Invitation
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav" style="margin-top:10px">
+                                <li class="active">
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Manage","Account")" target="_blank">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Change Password
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("logoff","Account")">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Sign Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>*@
+    }
+    if (HttpContext.Current.User.IsInRole("Employers"))
+    {
+        <div class="container no-padding">
+            <div class="row profile no-margin">
+                <div class="col-md-12 no-padding">
+                    <div class="profile-sidebar">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic">
+                            @*<img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">*@
+                        </div>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                @HttpContext.Current.User.Identity.Name
+                            </div>
+                            <div class="profile-usertitle-job">
+                                Employer
+                            </div>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- SIDEBAR BUTTONS -->
+                        @*<div class="profile-userbuttons">
+                                <button type="button" class="btn btn-success btn-sm">Follow</button>
+                                <button type="button" class="btn btn-danger btn-sm">Message</button>
+                            </div>*@
+                        <!-- END SIDEBAR BUTTONS -->
+                        <!-- SIDEBAR MENU -->
+                        <div class="profile-usermenu">
+
+
+                            <ul class="nav" style="margin-top:10px">
+                                <li class="active">
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Job Management
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Company/JobManage">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Job List
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Company/JobPosting">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Job Posting
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Company/JobApplicant" >
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Job Applicats
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Company/FindResume">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Search Resume
+                                    </a>
+                                </li>
+
+                            </ul>
+
+
+                            <ul class="nav" style="margin-top:10px">
+                                <li class="active">
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Company/Index">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        View Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Company/EditProfile">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Update Profile
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/Account/Manage">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Change Password
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Account/LogOff">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Sign Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END MENU -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+}
+
+
+

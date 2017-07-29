@@ -1,0 +1,7 @@
+﻿@using (Html.BeginForm("AddPhotos", "JobSeeker", FormMethod.Post, new { id = "photoForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <label for="file">Upload Image:</label>
+    <input type="file" class="upload" id="f_UploadImage"><br />
+    @*<img id="myUploadedImg" alt="Photo" style="width:180px;" />*@
+}

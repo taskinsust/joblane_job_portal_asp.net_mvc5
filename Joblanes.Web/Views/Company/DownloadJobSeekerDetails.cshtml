@@ -1,0 +1,392 @@
+﻿@using Web.Joblanes.Context
+@model Model.JobLanes.Dto.JobSeekerDto
+@{
+    ViewBag.Title = "Job Seeker";
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
+
+}
+@{
+    if (Model != null && Model.Id > 0)
+    {
+         <div class="row">
+                <div class="col-xs-1 text-left">
+                    &nbsp;
+                </div>
+                <div class="col-xs-5 text-left">
+                    <h2 class="text-primary">
+                        @Html.DisplayFor(model => model.FirstName) <span>&nbsp;</span>@Html.DisplayFor(model => model.LastName)
+                    </h2>
+
+
+                    <address style="margin-bottom: 5px;">
+                        @*<strong>Address</strong><br>*@
+                        <abbr title="Phone">Mob:</abbr> @Html.DisplayFor(model => model.ContactNumber)<br/>
+                        <abbr title="Phone">Email:</abbr> @Html.DisplayFor(model => model.ContactEmail)
+                    </address>
+                    <a target="_blank" href="#">
+                        <img src='~/images/web.png' width="24"/>
+                    </a>
+                    <a target="_blank" href="#">
+                        <img src='~/images/linkedin.png' width="24"/>
+                    </a>
+                </div>
+                <div class="col-xs-2 text-left">
+                    &nbsp;
+                </div>
+                <div class="col-xs-6 text-left">
+                    <address>
+                        <strong>Address</strong><br>
+                        @Html.DisplayFor(model => model.JobSeekerDetailList[0].Address)<br/>
+                        @{
+                            if (Model.JobSeekerDetailList[0].City != null)
+                            {
+                                @Html.DisplayFor(model => model.JobSeekerDetailList[0].City.Name)
+                                <span>,&nbsp;</span>
+                            }
+                            if (Model.JobSeekerDetailList[0].State != null)
+                            {
+                                @Html.DisplayFor(model => model.JobSeekerDetailList[0].State.Name)
+                                <span>,&nbsp;</span><br/>
+                            }
+                            if (Model.JobSeekerDetailList[0].Country != null)
+                            {
+                                @Html.DisplayFor(model => model.JobSeekerDetailList[0].Country.Name)
+                            }
+
+                        }
+                        <abbr title="Phone">zip</abbr> @Html.DisplayFor(model => model.JobSeekerDetailList[0].ZipCode)
+                    </address>
+                </div>
+                <div class="clearfix" style="padding-bottom: 5px;"></div>
+                <hr/>
+                <div class="col-xs-2 text-right">
+                    <h4 class="text-primary">About Me</h4>
+                </div>
+                <div class="col-xs-10">
+                    @{
+                        if (Model.JobSeekerSkillList.Any())
+                        {
+                            <span> I am expart in </span>@Model.JobSeekerSkillList[0].Skill
+                        }
+                        <br/>
+                        if (Model.JobSeekerDesiredJobList.Any())
+                        {
+                            <span> Willing to relocate: </span>
+                            if (Model.JobSeekerDesiredJobList[0].RelocatingPlaceOne == "2")
+                            {
+                                <span> Anywhere </span>
+                            }
+                            else
+                            {
+                                <span> U.S.A </span>
+                            }
+                            <br/>
+                            if (Model.JobSeekerDesiredJobList[0].EmploymentEligibility == 1)
+                            {
+                                <span> Authorized to work in the US for any employer </span>
+                            }
+                            else
+                            {
+                                <span>Sponsorship required to work in the US</span>
+                            }
+                        }
+                        //
+                    }
+                </div>
+                <div class="clearfix" style="padding-bottom: 5px;"></div>
+                <hr/>
+                <div class="col-xs-2 text-right">
+                    <h4 class="text-primary">Experience </h4>
+                </div>
+                <div class="col-xs-10 ">
+                    @{
+                        if (Model.JobSeekerExperienceList.Any())
+                        {
+                            foreach (var jobexp in Model.JobSeekerExperienceList)
+                            {
+                                <div class="row no-margin">
+                                    <h5 class="no-padding"><strong>@jobexp.CompanyName</strong></h5>
+                                    <span>@jobexp.Designation</span><br/>
+                                    @{
+                                        if (jobexp.IsCurrent)
+                                        {
+                                            <span style="">@jobexp.DateFrom.ToString("MMMM yyyy")</span>
+                                            <span> - Present</span>
+                                        }
+                                        else
+                                        {
+                                            <span style="">@jobexp.DateFrom.ToString("MMMM yyyy")</span>
+                                            <span> - </span>
+                                            <span style="">@jobexp.DateFrom.ToString("MMMM yyyy")</span>
+                                        }
+                                    }
+                                    <br/>
+                                    <span>@jobexp.CompanyAddress</span>
+
+                                </div>
+                                <br/>
+                            }
+                        }
+                    }
+                </div>
+
+                <div class="clearfix" style="padding-bottom: 5px;"></div>
+                <hr/>
+                <div class="col-xs-2 text-right">
+                    <h4 class="text-primary">Education </h4>
+                </div>
+                <div class="col-xs-10 ">
+                    @{
+                        if (Model.JobSeekerEducationList.Any())
+                        {
+                            foreach (var jobexp in Model.JobSeekerEducationList)
+                            {
+                                <div class="row no-margin">
+                                    <h5 class="no-padding"><strong>@jobexp.Degree</strong></h5>
+                                    <span>@jobexp.Institute</span><br/>
+
+                                    <span style="">@jobexp.StartingYear.ToString("MMMM yyyy")</span>
+                                    <span> - </span>
+                                    <span style="">@jobexp.PassingYear.ToString("MMMM yyyy")</span>
+
+                                </div>
+                                <br/>
+                            }
+                        }
+                    }
+                </div>
+                <div class="clearfix" style=""></div>
+
+
+                @{
+                    if (Model.JobSeekerSkillList.Any())
+                    {
+                        <div class="col-xs-2 text-right">
+                            <h4 class="text-primary">Skill </h4>
+                        </div>
+                        <div class="col-xs-10 ">
+                            @{
+                                foreach (var jobexp in Model.JobSeekerSkillList)
+                                {
+                                    <span>@jobexp.Skill</span><span>(@jobexp.Experence years)</span><span>, &nbsp;</span>
+
+                                }
+                            }
+
+                        </div>
+                        <div class="clearfix" style="padding-bottom: 5px;"></div>
+                    }
+                    if (Model.JobSeekerLinkList.Any())
+                    {
+                        <div class="col-xs-2 text-right">
+                            <h4 class="text-primary">Links </h4>
+                        </div>
+                        <div class="col-xs-10 ">
+                            @{
+                                foreach (var jobexp in Model.JobSeekerLinkList)
+                                {
+                                    <a href="@jobexp.Link">@jobexp.Link</a>
+                                    <br/>
+                                }
+                            }
+
+                        </div>
+                        <div class="clearfix" style="padding-bottom: 5px;"></div>
+                    }
+                    if (Model.JobSeekerMilitaryServiceList.Any())
+                    {
+                        <div class="col-xs-2 text-right">
+                            <h4 class="text-primary">Military Service </h4>
+                        </div>
+                        <div class="col-xs-10 ">
+                            @{
+                                foreach (var jobexp in Model.JobSeekerMilitaryServiceList)
+                                {
+                                    <div class="row no-margin">
+                                        <span>Service Country: @jobexp.Country.Name</span><br/>
+                                        <span>Branch: @jobexp.Branch</span><br/>
+                                        <span>Rank: @jobexp.Rank</span><br/>
+                                        <span style="">@jobexp.DateFrom.ToString("MMMM yyyy")</span>
+                                        <span> - </span>
+                                        <span style="">@jobexp.DateTo.Value.ToString("MMMM yyyy")</span><br/>
+                                        <p>@jobexp.Description</p>
+                                        <p>Commendations: @jobexp.Commendations</p>
+                                    </div>
+                                    <br/>
+                                }
+
+                            }
+                        </div>
+                        <div class="clearfix" style="padding-bottom: 5px;"></div>
+                    }
+                    if (Model.JobSeekerAwardList.Any())
+                    {
+                        <div class="col-xs-2 text-right">
+                            <h4 class="text-primary">Award </h4>
+                        </div>
+                        <div class="col-xs-10 ">
+                            @{
+                                foreach (var jobexp in Model.JobSeekerAwardList)
+                                {
+                                    <div class="row no-margin">
+                                        <h5 class="no-padding"><strong>@jobexp.Title</strong></h5>
+
+                                        <span style="">@jobexp.DateAwarded.ToString("MMMM dd yyyy")</span>
+                                        <br/>
+                                        <p>@jobexp.Description</p>
+
+                                    </div>
+                                    <br/>
+                                }
+
+                            }
+                        </div>
+                        <div class="clearfix" style="padding-bottom: 5px;"></div>
+                    }
+                    if (Model.JobSeekerCertificateList.Any())
+                    {
+                        <div class="col-xs-2 text-right">
+                            <h4 class="text-primary">Certifications/Licenses </h4>
+                        </div>
+                        <div class="col-xs-10 ">
+                            @{
+                                foreach (var jobexp in Model.JobSeekerCertificateList)
+                                {
+                                    <div class="row no-margin">
+                                        <h5 class="no-padding"><strong>@jobexp.Title</strong></h5>
+
+                                        <span style="">@jobexp.StartDate.ToString("MMMM yyyy")</span>
+                                        <span> - </span>
+                                        <span style="">
+                                    @{
+                                        if (@jobexp.CloseDate != null)
+                                        {
+                                            @jobexp.CloseDate.ToString("MMMM yyyy")
+                                        }
+                                    }
+                                </span><br/>
+                                        <p>@jobexp.Description</p>
+                                    </div>
+                                    <br/>
+                                }
+                            }
+                        </div>
+                        <div class="clearfix" style="padding-bottom: 5px;"></div>
+                    }
+                    if (Model.JobSeekerGroupList.Any())
+                    {
+                        <div class="col-xs-2 text-right">
+                            <h4 class="text-primary">Group </h4>
+                        </div>
+                        <div class="col-xs-10 ">
+                            @{
+                                foreach (var jobexp in Model.JobSeekerGroupList)
+                                {
+                                    <div class="row no-margin">
+                                        <h5 class="no-padding"><strong>@jobexp.Title</strong></h5>
+
+                                        <span style="">@jobexp.DateFrom.ToString("MMMM yyyy")</span>
+                                        <span> - </span>
+                                        <span style="">
+                                    @{
+                                        if (@jobexp.DateTo != null)
+                                        {
+                                            @jobexp.DateTo.Value.ToString("MMMM yyyy")
+                                        }
+                                    }
+                                </span><br/>
+                                        <p>@jobexp.Description</p>
+                                    </div>
+                                    <br/>
+                                }
+                            }
+                        </div>
+                        <div class="clearfix" style="padding-bottom: 5px;"></div>
+                    }
+                    if (Model.JobSeekerPatentsList.Any())
+                    {
+                        <div class="col-xs-2 text-right">
+                            <h4 class="text-primary">Patent </h4>
+                        </div>
+                        <div class="col-xs-10 ">
+                            @{
+                                foreach (var jobexp in Model.JobSeekerPatentsList)
+                                {
+                                    <div class="row no-margin">
+                                        <h5 class="no-padding"><strong>@jobexp.Title</strong></h5>
+                                        <h5 class="no-padding">Patent No: <strong>@jobexp.PatentNo</strong></h5>
+                                        <p>
+                                            Url: <a href="@jobexp.Url">@jobexp.Url</a>
+                                        </p>
+                                        <span style="">@jobexp.PublishDate.ToString("MMMM dd yyyy")</span>
+                                        <br/>
+                                        <p>@jobexp.Description</p>
+
+                                    </div>
+                                    <br/>
+                                }
+
+                            }
+                        </div>
+                        <div class="clearfix" style="padding-bottom: 5px;"></div>
+                    }
+                    if (Model.JobSeekerPublicationsList.Any())
+                    {
+                        <div class="col-xs-2 text-right">
+                            <h4 class="text-primary">Publication </h4>
+                        </div>
+                        <div class="col-xs-10 ">
+                            @{
+                                foreach (var jobexp in Model.JobSeekerPublicationsList)
+                                {
+                                    <div class="row no-margin">
+                                        <h5 class="no-padding"><strong>@jobexp.Title</strong></h5>
+
+                                        <p>
+                                            Url: <a href="@jobexp.Url">@jobexp.Url</a>
+                                        </p>
+                                        <span style="">@jobexp.PublishDate.ToString("MMMM dd yyyy")</span>
+                                        <br/>
+                                        <p>@jobexp.Description</p>
+
+                                    </div>
+                                    <br/>
+                                }
+
+                            }
+                        </div>
+                        <div class="clearfix" style="padding-bottom: 5px;"></div>
+                    }
+                    if (Model.JobSeekerAdditionalInformationList.Any())
+                    {
+                        <div class="col-xs-2 text-right">
+                            <h4 class="text-primary">Additional Information </h4>
+                        </div>
+                        <div class="col-xs-10 ">
+                            @{
+                                foreach (var jobexp in Model.JobSeekerAdditionalInformationList)
+                                {
+                                    <p>@jobexp.Description</p>
+                                }
+                            }
+
+                        </div>
+                        <div class="clearfix" style="padding-bottom: 5px;"></div>
+                    }
+                }
+
+                </div>
+    }
+     else
+                {
+                    <div class="row" style="padding: 20px;">
+                        <div class="col-xs-12 text-center">
+                            <div class="alert alert-danger" role="alert">
+                                JobSeeker Profile Not found.
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+}

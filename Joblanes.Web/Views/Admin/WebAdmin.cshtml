@@ -1,0 +1,42 @@
+﻿@using Web.Joblanes.Models
+@model IEnumerable<Web.Joblanes.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "DashBoard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="padding: 1%;">
+    <div class="col-md-12">
+        <div class="panel panel-primary">            
+                <div class="panel-heading custom-panel-h">Web Admin</div>
+
+            <div class="panel-body">
+
+                <table class="table table-bordered table-condensed table-hover">
+                    <tr>
+                        <th>Sl.</th>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Last Login</th>
+                    </tr>
+
+                    @{ int i= 1;
+                        foreach (ApplicationUser wbObj in ViewBag.webadminList)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@wbObj.Email</td>
+                                <td>@wbObj.UserName</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </table>
+                @Html.ActionLink("Create Web Admin", "CreateWebAdmin", "Account", new {  }, new {@class="btn btn-primary"})
+            </div>
+        </div>
+    </div>
+</div>
+

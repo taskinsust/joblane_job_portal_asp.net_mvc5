@@ -1,0 +1,44 @@
+﻿@using Web.Joblanes.Models;
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Manage Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-1">&nbsp;</div>
+    <div class="col-md-10">
+        <div class="panel panel-primary">
+            <div class="panel-heading custom-panel-h">Change Password</div>
+            <div class="panel-body">
+                <p class="text-success">@ViewBag.StatusMessage</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <div class="col-md-10">
+                                @if (ViewBag.HasLocalPassword)
+                                {
+                                    @Html.Partial("_ChangePasswordPartial")
+                                }
+                                else
+                                {
+                                    @Html.Partial("_SetPasswordPartial")
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
